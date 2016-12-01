@@ -1,0 +1,26 @@
+{
+  "name": "radiator",
+  "version": "0.0.1",
+  "description": "Den som flest builds får bjuda på öl!",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niftydevelopment/radiator.git"
+  },
+  "keywords": [
+    "mamma"
+  ],
+  "author": "dsin, daisy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niftydevelopment/radiator/issues"
+  },
+  "homepage": "https://github.com/niftydevelopment/radiator#readme",
+  "dependencies": {
+    "promise": "^7.1.1",
+    "request": "^2.79.0"
+  }
+}

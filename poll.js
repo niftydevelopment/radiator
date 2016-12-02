@@ -10,27 +10,20 @@ var urlSuffix = '/api/json?pretty=true';
 var buildsUrl = baseurl + branch + urlSuffix;
 
   var poll = function() {
+    //console.log('poll');
     
-    console.log('poll');
-
     return new Promise(function(resolve, reject) {
       var builds = [];
-      getbuilds().then(function(result) {
-        console.log('poll A');
-
+      getbuilds().then(function(result) {    
 
         Promise.all(result).then(function (res) {
-          console.log('poll B');
-            for (r in res) {
-              if (res[r].changeSet.items.length > 0) {
-                builds.push(buildModel(res[r]));
-              }
+          for (r in res) {
+            if (res[r].changeSet.items.length > 0) {
+              builds.push(buildModel(res[r]));
             }
-
+          }
 
         }).finally(function() {
-
-console.log('poll c', builds.length);
 
           /*
           var filtered = builds.filter(function(b) {

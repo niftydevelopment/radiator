@@ -3,28 +3,20 @@ var savedata = require('./savedata.js');
 var report = require('./report.js');
 var colors = require('colors');
 
-var chefen = false;
-
 var runit = function() {
   setTimeout(function() { 
-    console.log('running');
+    //console.log('running');
 
     poll.poll().then(function(result) {
-      console.log('poll is done ok');
+      //console.log('poll is done ok');
 
-      savedata.savedata(result).then(function() {
-      	console.log('generate report', result.length);
-        report.generate(result);
+      savedata.savedata(result).then(function(savedData) {
+      	//console.log('generate report', result.length);
+        report.generate(savedData);
         chefen = false;
 
       }, function() {
-        console.log('poll is done, no change');
-        console.log('chefen');
-      	//if (!chefen) {
-      	  console.log(colors.random('Den som just nu skall bjuda på öl på nästa AW är: CHEFEN!!!'));
-      	  chefen = true;
-      	//}
-
+        //
       });
 
     });

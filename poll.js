@@ -10,16 +10,17 @@ var urlSuffix = '/api/json?pretty=true';
 var buildsUrl = baseurl + branch + urlSuffix;
 
   var poll = function() {
+    
+    console.log('poll');
 
     return new Promise(function(resolve, reject) {
-
-
+      var builds = [];
       getbuilds().then(function(result) {
-        var builds = [];
+        console.log('poll A');
 
-        Promise.all(result)
-          .then(function (res) {
-          
+
+        Promise.all(result).then(function (res) {
+          console.log('poll B');
             for (r in res) {
               if (res[r].changeSet.items.length > 0) {
                 builds.push(buildModel(res[r]));
@@ -29,11 +30,15 @@ var buildsUrl = baseurl + branch + urlSuffix;
 
         }).finally(function() {
 
+console.log('poll c', builds.length);
+
+          /*
           var filtered = builds.filter(function(b) {
             return b.result === 'FAILURE';
           });
+          */
 
-          resolve(filtered);
+          resolve(builds);
         });
 
       });

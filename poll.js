@@ -11,29 +11,36 @@ var buildsUrl = baseurl + branch + urlSuffix;
 
   var poll = function() {
 
-    getbuilds().then(function(result) {
-      var builds = [];
+    return new Promise(function(resolve, reject) {
 
-      Promise.all(result)
-        .then(function (res) {
-        
-          for (r in res) {
-            if (res[r].changeSet.items.length > 0) {
-              builds.push(buildModel(res[r]));
+
+      getbuilds().then(function(result) {
+        var builds = [];
+
+        Promise.all(result)
+          .then(function (res) {
+          
+            for (r in res) {
+              if (res[r].changeSet.items.length > 0) {
+                builds.push(buildModel(res[r]));
+              }
             }
-          }
 
 
-      }).finally(function() {
+        }).finally(function() {
 
-        var filtered = builds.filter(function(b) {
-          return b.result !== 'FAILURE';
+          var filtered = builds.filter(function(b) {
+            return b.result !== 'FAILURE';
+          });
+
+          resolve(filtered);
         });
 
       });
 
-    });
 
+
+    });
   }
 
   var getbuilds = function() {

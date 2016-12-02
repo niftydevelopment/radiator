@@ -6,12 +6,25 @@ var historyFile = './history.json';
 
 var savedata = function(newBuilds) {
   
-  readstoreddata().then(function(storedBuilds) {    
-    var data = uniondata(storedBuilds, newBuilds);
-    //console.log('>>>>>', data);
+  return new Promise(function(resolve, reject) {
 
-    fs.writeFile(historyFile, JSON.stringify(data), function(err) {
-      console.log('data is stored!');
+    readstoreddata().then(function(storedBuilds) {    
+      var data = uniondata(storedBuilds, newBuilds);
+      
+      //console.log('Will update stored data:', storedBuilds.length !== data.length);
+
+      if (storedBuilds.length === data.length) {
+        //console.log('No new builds.');
+        reject(data);
+        return;
+      }
+
+      fs.writeFile(historyFile, JSON.stringify(data), function(err) {
+        //console.log('data is stored. Length:', data.length);
+        resolve(data);
+        return;
+      });
+
     });
 
   });
@@ -27,7 +40,12 @@ var readstoreddata = function() {
   return new Promise(function(resolve, reject) {
     
     fs.readFile(historyFile, 'utf8', function (err, storedBuilds) {
-      resolve(JSON.parse(storedBuilds));
+      if (!storedBuilds) {
+        storedBuilds = [];
+      } else {
+        storedBuilds = JSON.parse(storedBuilds);
+      }
+      resolve(storedBuilds);
     });
 
   });

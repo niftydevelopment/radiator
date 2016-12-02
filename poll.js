@@ -30,7 +30,7 @@ var buildsUrl = baseurl + branch + urlSuffix;
         }).finally(function() {
 
           var filtered = builds.filter(function(b) {
-            return b.result !== 'FAILURE';
+            return b.result === 'FAILURE';
           });
 
           resolve(filtered);

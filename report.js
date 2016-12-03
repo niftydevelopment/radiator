@@ -1,5 +1,7 @@
 var _ = require('lodash');
 var colors = require('colors');
+var figlet = require('figlet');
+var Promise = require('promise');
 
 var generate = function(builds) {
   //console.log('generate report', builds.length);
@@ -8,39 +10,25 @@ var generate = function(builds) {
     return;
   };
 
-  console.log(colors.blue('*******O****OOOOOOOOO**OOO**********O**********OOO********'));
-  console.log(colors.blue('******O*O*******O*******O**********O*O********O***********'));
-  console.log(colors.blue('*****O***O******O*******O*********O***O******O************'));
-  console.log(colors.blue('****OOOOOO******O*******O********OOOOOOO******OOOO********'));
-  console.log(colors.blue('***O******O*****O*******O*******O*******O*********O*******'));
-  console.log(colors.blue('***O******O*****O*******O****O**O*******O********O********'));
-  console.log(colors.blue('***O******O****OOO******OOOOOO**O*******O*****OOO*********'));
+  printAtlas('SUCCESS').then(function() {
 
+    var failedBuids = getFailedBuildsInOrder(builds);
 
-  var failedBuids = getFailedBuildsInOrder(builds);
+    for (var i = 0; i < 5; i++) {
+      printBuilds(builds[i]);
+    }
 
-  for (var i = 0; i < 5; i++) {
+    console.log(colors.green('**********************************************************'));
 
-  	if (builds[i].result !== 'FAILURE') {
-  		console.log(colors.green('**********************************************************'));
-  		console.log(colors.green(builds[i].user));
-  		console.log('Kommentar' + builds[i].msg);
-  	} else {
-      console.log(colors.green('**********************************************************'));
-	  	console.log(colors.red(builds[i].user));
-	   	console.log('Kommentar' + builds[i].msg);
-  	}
+    if (failedBuids.length > 0) {
+       console.log('Den som just nu skall bjuda på öl på nästa AW är:');
+       console.log(colors.random(failedBuids[0].user));
+    } else {
+       console.log('Den som just nu skall bjuda på öl på nästa AW är: ', colors.random('CHEFEN!!!'));
+    }
 
-  }
+  });
 
-  console.log(colors.green('**********************************************************'));
-
-  if (failedBuids.length > 0) {
-  	 console.log('Den som just nu skall bjuda på öl på nästa AW är:');
-     console.log(colors.random(failedBuids[0].user));
-  } else {
-     console.log('Den som just nu skall bjuda på öl på nästa AW är: ', colors.random('CHEFEN!!!'));
-  }
 }
 
 
@@ -66,5 +54,33 @@ var getFailedBuildsInOrder = function(builds) {
 
 }
 
+var printBuilds = function(build) {
+  if (build.result !== 'FAILURE') {
+    console.log(colors.green('******************************************************'));
+    console.log(colors.green(build.user));
+    console.log('Kommentar' + build.msg);
+  } else {
+    console.log(colors.green('******************************************************'));
+    console.log(colors.red(build.user));
+    console.log('Kommentar' + build.msg);
+  }
+} 
+
+var printAtlas = function(status) {
+  var color = colors.green;
+  if (status !== 'SUCCESS') {
+    color = colors.red;
+  }
+
+  return new Promise(function(resolve) {
+
+    figlet('** A T L A S **', function(err, data) {
+      console.log(color(data));
+      resolve();
+    });
+
+  });
+
+}
 
 exports.generate = generate;

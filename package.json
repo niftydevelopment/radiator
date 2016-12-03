@@ -21,6 +21,7 @@
   "homepage": "https://github.com/niftydevelopment/radiator#readme",
   "dependencies": {
     "colors": "^1.1.2",
+    "figlet": "^1.2.0",
     "lodash": "^4.17.2",
     "promise": "^7.1.1",
     "request": "^2.79.0"

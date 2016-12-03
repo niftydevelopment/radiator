@@ -14,6 +14,7 @@ var buildsUrl = baseurl + branch + urlSuffix;
     
     return new Promise(function(resolve, reject) {
       var builds = [];
+      
       getbuilds().then(function(result) {    
 
         Promise.all(result).then(function (res) {
@@ -87,6 +88,7 @@ var buildsUrl = baseurl + branch + urlSuffix;
     o.user = res.changeSet.items[0].user;
     o.msg = res.changeSet.items[0].msg;
     o.date = res.changeSet.items[0].date;
+    o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z
     o.result = res.result;
     return o;
   }

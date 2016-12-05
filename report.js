@@ -14,6 +14,7 @@ var generate = function(builds) {
 
     var failedBuids = getFailedBuildsInOrder(builds);
 
+    builds = _.orderBy(builds, 'formattedDate');
     for (var i = 0; i < 5; i++) {
       printBuilds(builds[i]);
     }
@@ -55,6 +56,9 @@ var getFailedBuildsInOrder = function(builds) {
 }
 
 var printBuilds = function(build) {
+
+
+
   if (build.result !== 'FAILURE') {
     console.log(colors.green('******************************************************'));
     console.log(colors.green(build.user));

@@ -16,13 +16,11 @@ var savedata = function(newBuilds) {
       if (storedBuilds.length === data.length) {
         //console.log('No new builds.');
         reject(data);
-        return;
       }
 
       fs.writeFile(historyFile, JSON.stringify(data), function(err) {
         //console.log('data is stored. Length:', data.length);
         resolve(data);
-        return;
       });
 
     });

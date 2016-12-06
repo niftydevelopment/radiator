@@ -1,0 +1,313 @@
+/*
+http://vl-bygget-icc:9000/api/resources?metrics=ncloc,coverage&format=json
+*/
+
+[
+   {
+      "id":1,
+      "key":"se.sjv.duvan:duvan",
+      "name":"duvan - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-02T23:26:39+0100",
+      "creationDate":"2015-05-20T15:01:14+0200",
+      "lname":"duvan - parent",
+      "version":"2.4.6-SNAPSHOT",
+      "description":"Duvan - Utskickshantering",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":11284.0,
+            "frmt_val":"11,284"
+         },
+         {
+            "key":"coverage",
+            "val":61.5,
+            "frmt_val":"61.5%"
+         }
+      ]
+   },
+   {
+      "id":7826,
+      "key":"se.sjv.pof:pulf",
+      "name":"Pulf - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-09-23T00:00:46+0200",
+      "creationDate":"2015-09-09T09:11:09+0200",
+      "lname":"Pulf - parent",
+      "version":"4.2.2-SNAPSHOT",
+      "description":"Pulf parent pom",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":16171.0,
+            "frmt_val":"16,171"
+         },
+         {
+            "key":"coverage",
+            "val":52.8,
+            "frmt_val":"52.8%"
+         }
+      ]
+   },
+   {
+      "id":1287,
+      "key":"se.sjv.jorden:jorden-parent",
+      "name":"jorden",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-05T23:46:11+0100",
+      "creationDate":"2015-06-24T15:07:28+0200",
+      "lname":"jorden",
+      "version":"7.0.0-SNAPSHOT",
+      "description":"",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":243946.0,
+            "frmt_val":"243,946"
+         },
+         {
+            "key":"coverage",
+            "val":49.1,
+            "frmt_val":"49.1%"
+         }
+      ]
+   },
+   {
+      "id":1166,
+      "key":"se.sjv.laman:laman-parent",
+      "name":"laman",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-11-15T09:02:26+0100",
+      "creationDate":"2015-06-10T14:25:10+0200",
+      "lname":"laman",
+      "version":"1.0.3-SNAPSHOT",
+      "description":"System f\u00f6r rapporter med formkrav",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":2155.0,
+            "frmt_val":"2,155"
+         },
+         {
+            "key":"coverage",
+            "val":53.7,
+            "frmt_val":"53.7%"
+         }
+      ]
+   },
+   {
+      "id":5502,
+      "key":"se.sjv.pof:alf-parent",
+      "name":"alf - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-05T21:15:09+0100",
+      "creationDate":"2015-09-03T11:19:08+0200",
+      "lname":"alf - parent",
+      "version":"3.4.0-SNAPSHOT",
+      "description":"Parent pom f\u00f6r Alf applikationen (p\u00e5 EE6)",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":35115.0,
+            "frmt_val":"35,115"
+         },
+         {
+            "key":"coverage",
+            "val":66.1,
+            "frmt_val":"66.1%"
+         }
+      ]
+   },
+   {
+      "id":22141,
+      "key":"se.sjv.minsid:minsid",
+      "name":"Mina Sidor",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-11-17T10:16:40+0100",
+      "creationDate":"2016-11-17T10:16:42+0100",
+      "lname":"Mina Sidor",
+      "version":"2.0.7-SNAPSHOT",
+      "description":"",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":38401.0,
+            "frmt_val":"38,401"
+         },
+         {
+            "key":"coverage",
+            "val":5.4,
+            "frmt_val":"5.4%"
+         }
+      ]
+   },
+   {
+      "id":4140,
+      "key":"se.sjv.kontroll.atlas:atlas-parent",
+      "name":"Atlas - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-11-30T22:18:46+0100",
+      "creationDate":"2015-08-14T16:04:42+0200",
+      "lname":"Atlas - parent",
+      "version":"7.0.9-SNAPSHOT",
+      "description":"Atlas parent pom",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":71286.0,
+            "frmt_val":"71,286"
+         },
+         {
+            "key":"coverage",
+            "val":67.3,
+            "frmt_val":"67.3%"
+         }
+      ]
+   },
+   {
+      "id":6188,
+      "key":"se.sjv.pof:flit",
+      "name":"flit - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-05T22:50:08+0100",
+      "creationDate":"2015-09-03T12:08:57+0200",
+      "lname":"flit - parent",
+      "version":"2.3.11-SNAPSHOT",
+      "description":"Parent pom f\u00f6r flit",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":94400.0,
+            "frmt_val":"94,400"
+         },
+         {
+            "key":"coverage",
+            "val":67.1,
+            "frmt_val":"67.1%"
+         }
+      ]
+   },
+   {
+      "id":15393,
+      "key":"se.sjv.falken:mk-root",
+      "name":"mk-root",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-03-04T11:13:54+0100",
+      "creationDate":"2016-03-03T14:57:56+0100",
+      "lname":"mk-root",
+      "version":"2.4.3.1-SNAPSHOT",
+      "description":"",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":42524.0,
+            "frmt_val":"42,524"
+         }
+      ]
+   },
+   {
+      "id":8742,
+      "key":"se.sjv.aster:aster-parent",
+      "name":"aster-parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-05T22:08:57+0100",
+      "creationDate":"2015-09-21T12:43:07+0200",
+      "lname":"aster-parent",
+      "version":"7.2.0-SNAPSHOT",
+      "description":"St\u00f6dr\u00e4ttsregister",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":68946.0,
+            "frmt_val":"68,946"
+         },
+         {
+            "key":"coverage",
+            "val":82.0,
+            "frmt_val":"82.0%"
+         }
+      ]
+   },
+   {
+      "id":15079,
+      "key":"se.sjv.hagen:hagen-parent",
+      "name":"hagen-parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-05T21:08:55+0100",
+      "creationDate":"2016-02-26T12:00:50+0100",
+      "lname":"hagen-parent",
+      "version":"2.1.1-SNAPSHOT",
+      "description":"",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":13241.0,
+            "frmt_val":"13,241"
+         },
+         {
+            "key":"coverage",
+            "val":7.1,
+            "frmt_val":"7.1%"
+         }
+      ]
+   },
+   {
+      "id":269,
+      "key":"se.sjv.bea:bea-parent",
+      "name":"bea - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-02T15:55:27+0100",
+      "creationDate":"2015-05-21T16:22:12+0200",
+      "lname":"bea - parent",
+      "version":"2.10.35-SNAPSHOT",
+      "description":"SJV_MavenizedSeamReferenceProject - parent",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":37004.0,
+            "frmt_val":"37,004"
+         },
+         {
+            "key":"coverage",
+            "val":56.0,
+            "frmt_val":"56.0%"
+         }
+      ]
+   },
+   {
+      "id":938,
+      "key":"se.sjv.hepans:hepans-parent",
+      "name":"hepans - parent",
+      "scope":"PRJ",
+      "qualifier":"TRK",
+      "date":"2016-12-05T21:32:56+0100",
+      "creationDate":"2015-05-26T15:19:20+0200",
+      "lname":"hepans - parent",
+      "version":"58.0.10-SNAPSHOT",
+      "description":"SJV_MavenizedSeamReferenceProject - parent",
+      "msr":[
+         {
+            "key":"ncloc",
+            "val":19951.0,
+            "frmt_val":"19,951"
+         },
+         {
+            "key":"coverage",
+            "val":27.2,
+            "frmt_val":"27.2%"
+         }
+      ]
+   }
+]

@@ -11,30 +11,56 @@ var generate = function(builds) {
   };
 
   builds = _.orderBy(builds, 'formattedDate');
-  
   var currentStatus = builds[0].result;
 
-  printAtlas(currentStatus).then(function() {
+  //var coverage = _.orderBy(builds, 'coverage');
+  //console.log(coverage);
 
-    var stars = '';
+  printAtlas(currentStatus, builds[0].coverage).then(function() {
+
+    var stars = 'Build history: ';
+    var prevBuild = null;
     builds.forEach(function(b) {
       if (b.result === 'SUCCESS') {
-        stars += '*';
+        
+        if (!prevBuild) {
+          stars += '-';
+          return;
+        }
+
+        if (!b.coverage) {
+          stars += '-';
+          return;
+        }
+
+        if (b.coverage > prevBuild.coverage) {
+          stars += '*';
+        } else if (b.coverage > prevBuild.coverage) {
+          stars += ':-(';
+        } else {
+          stars += '-';
+        }
+
+      } else if (b.result === 'FAIL') {
+        stars += 'x';  
       } else {
-        stars += '-';  
+        stars += '?';  
       }
+      prevBuild = b;
     });
+
+    console.log('');
     console.log(stars);
+    console.log('');
 
     var failedBuids = getFailedBuildsInOrder(builds);
 
     builds = _.orderBy(builds, 'formattedDate');
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 7; i++) {
       printBuilds(builds[i]);
     }
-
+    
     console.log(colors.green('**********************************************************'));
-
     if (failedBuids.length > 0) {
        console.log('Den som just nu skall bjuda på öl på nästa AW är:');
        console.log(colors.random(failedBuids[0].user));
@@ -82,15 +108,15 @@ var printBuilds = function(build) {
   }
 } 
 
-var printAtlas = function(status) {
+var printAtlas = function(status, coverage) {
   var color = colors.green;
-  if (status !== 'SUCCESS') {
+  if (status === 'FAIL') {
     color = colors.red;
   }
 
   return new Promise(function(resolve) {
 
-    figlet('** A T L A S **', function(err, data) {
+    figlet('** A T L A S '+ coverage + ' **', function(err, data) {
       console.log(color(data));
       resolve();
     });

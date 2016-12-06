@@ -4,7 +4,8 @@
   "description": "Den som flest builds får bjuda på öl!",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "run": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
   "keywords": [
     "mamma"
   ],
-  "author": "dsin, daisy",
+  "author": "dsin, daisy, fwin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/niftydevelopment/radiator/issues"

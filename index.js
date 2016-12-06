@@ -1,4 +1,5 @@
-var poll = require('./poll.js');
+var pollJenkins = require('./poll-jenkins.js');
+var pollSonar = require('./poll-sonar.js');
 var savedata = require('./savedata.js');
 var report = require('./report.js');
 var colors = require('colors');
@@ -10,24 +11,28 @@ var runit = function() {
   setTimeout(function() {
 
     //console.log('running');
-
-    poll.poll().then(function(result) {
+    
+    pollJenkins.poll().then(function(builds) {
       //console.log('poll is done ok', result.length);
+        pollSonar.poll(builds).then(function(decoratedBuilds) {
 
-      savedata.savedata(result).then(function(savedData) {
-      	//console.log('new data to print', savedData.length);
-        report.generate(savedData);
-        initialPrint = true;
-      }, function(savedData) {
-        //console.log('no new data to print', savedData.length);
 
-        if (!initialPrint) {
-          report.generate(savedData);  
-          initialPrint = true;
-        }
+          savedata.savedata(decoratedBuilds).then(function(savedData) {
+            //console.log('new data to print', savedData.length);
+            report.generate(savedData);
+            initialPrint = true;
+          }, function(savedData) {
+            //console.log('no new data to print', savedData.length);
 
-      });
+            if (!initialPrint) {
+              report.generate(savedData);  
+              initialPrint = true;
+            }
 
+          });
+
+
+        });
     });
 
     runit();
@@ -35,7 +40,3 @@ var runit = function() {
 }
 
 runit();
-
-
-
-

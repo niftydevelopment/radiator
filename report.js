@@ -111,6 +111,11 @@ var printBuilds = function(build) {
 } 
 
 var printAtlas = function(status, coverage) {
+
+  if (!coverage) {
+    coverage = '?';
+  }
+
   var color = colors.green;
   if (status === 'FAIL') {
     color = colors.red;

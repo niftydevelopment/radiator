@@ -16,16 +16,17 @@ var runit = function() {
       //console.log('poll is done ok', result.length);
         pollSonar.poll(builds).then(function(decoratedBuilds) {
 
-
           savedata.savedata(decoratedBuilds).then(function(savedData) {
+            //console.log(decoratedBuilds);
             //console.log('new data to print', savedData.length);
             report.generate(savedData);
             initialPrint = true;
           }, function(savedData) {
             //console.log('no new data to print', savedData.length);
+            //console.log(savedData);
 
             if (!initialPrint) {
-              report.generate(savedData);  
+              report.generate(savedData);
               initialPrint = true;
             }
 

@@ -4,7 +4,8 @@ var figlet = require('figlet');
 var Promise = require('promise');
 
 var generate = function(builds) {
-  //console.log('generate report', builds.length);
+  //console.log('generate report', builds[0].formatedCoverage);
+  //return;
 
   if (builds.length === 0) {//det finns ingen förändring sedan sist. Skriv inte ut något.
     return;
@@ -16,11 +17,12 @@ var generate = function(builds) {
   //var coverage = _.orderBy(builds, 'coverage');
   //console.log(coverage);
 
-  printAtlas(currentStatus, builds[0].coverage).then(function() {
+  printAtlas(currentStatus, builds[0].formatedCoverage).then(function() {
 
     var stars = 'Build history: ';
     var prevBuild = null;
     builds.forEach(function(b) {
+      //console.log(b.coverage);
       if (b.result === 'SUCCESS') {
         
         if (!prevBuild) {

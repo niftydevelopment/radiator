@@ -18,8 +18,9 @@ var poll = function(builds) {
 	  })[0];
 
 	  builds.forEach(function(b) {
+	  	//console.log('--->', project.msr[1].frmt_val);
 	  	b.coverage = project.msr[1].val;
-	  	b.formatedCoverage = project.msr[1].frmt_val;
+	  	b.formattedCoverage = project.msr[1].frmt_val;
 	  });
 
       resolve(builds);

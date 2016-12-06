@@ -10,7 +10,21 @@ var generate = function(builds) {
     return;
   };
 
-  printAtlas('SUCCESS').then(function() {
+  builds = _.orderBy(builds, 'formattedDate');
+  
+  var currentStatus = builds[0].result;
+
+  printAtlas(currentStatus).then(function() {
+
+    var stars = '';
+    builds.forEach(function(b) {
+      if (b.result === 'SUCCESS') {
+        stars += '*';
+      } else {
+        stars += '-';  
+      }
+    });
+    console.log(stars);
 
     var failedBuids = getFailedBuildsInOrder(builds);
 
@@ -36,7 +50,7 @@ var generate = function(builds) {
 var getFailedBuildsInOrder = function(builds) {
 
   var failedBuilds = builds.filter(function(b) {
-   return b.result === 'FAILURE';
+   return b.result === 'FAIL';
   });
   
   if (failedBuilds.length > 0) {
@@ -57,14 +71,12 @@ var getFailedBuildsInOrder = function(builds) {
 
 var printBuilds = function(build) {
 
-
-
-  if (build.result !== 'FAILURE') {
+  if (build.result !== 'FAIL') {
     console.log(colors.green('******************************************************'));
     console.log(colors.green(build.user));
     console.log('Kommentar' + build.msg);
   } else {
-    console.log(colors.green('******************************************************'));
+    console.log(colors.red('******************************************************'));
     console.log(colors.red(build.user));
     console.log('Kommentar' + build.msg);
   }

@@ -1,12 +1,10 @@
-var poll = require('./poll.js');
-var savedata = require('./savedata.js');
 var report = require('./report.js');
 var colors = require('colors');
 
 var chefen = false;
 
 var runit = function() {
-  report.generate([{"id":"2016-12-02_17-05-09","user":"esvel","msg":"PCAP-16232 Källreferens sätts felaktigt på Åtagandeytor. Måste köra om DDÄ UppdateraKontrollytaReferenser600 som konsekvens av att ytor kan ha fått fel referenser.","date":"2016-12-02T16:04:32.205922Z","result":'FAIL'},{"id":"2016-12-02_16-35-09","user":"lkzt","msg":"PCAP-16232 - Tar bort blockIDt som tidgare lagts till åtagandes sourceRef. cr: eje/dsin","date":"2016-12-02T15:30:56.298785Z","result":"SUCCESS"},{"id":"2016-12-02_16-20-09","user":"fwin","msg":"PCAP-????, uppdaterat postman collection\n\nCR: :()-|-<","date":"2016-12-02T15:19:56.204538Z","result":"FAIL"},{"id":"2016-12-02_15-50-09","user":"fwin","msg":"PCAP-16945, fixat så att datumet då DDÄ kördes som uppdaterar arsresultatprojectionen visas i gui.\n\nCR: demas","date":"2016-12-02T14:41:23.516631Z","result":"SUCCESS"},{"id":"2016-12-02_14-05-08","user":"llan","msg":"PCAP-14857 Fel uppgift i CDB protokoll justerat rapporterande ppn\ncr: esvel","date":"2016-12-02T13:01:10.033225Z","result":"SUCCESS"},{"id":"2016-12-02_13-35-08","user":"lkzt","msg":"PCAP-16967 - Går nu att skapa prorokoll för får, get och gris. CR: dsin","date":"2016-12-02T12:33:40.126635Z","result":"FAILURE"}]);
+  report.generate([{"id":"2016-12-05_16-07-29","user":"llan","msg":"uppdaterat pom med ny version 7.1.0-SNAPSHOT\ncr: mkalk","date":"2016-12-05T14:41:49.306238Z","formattedDate":"20161205144149306238","result":"SUCCESS"},{"id":"2016-12-05_14-04-52","user":"fwin","msg":"PCAP-15368, uppdaterat lantbruksföretaginfo och produktionsplatsinfo till v3.0.0.R resp. v2.0.1.R.\n\nCR: Mikhail","date":"2016-12-05T12:35:03.263112Z","formattedDate":"20161205123503263112","result":"SUCCESS"},{"id":"2016-12-05_13-18-49","user":"rjans","msg":"PCAP-16945, Ändra namn från FastställdAreal till KonstateradAreal, beräkna kolumnerna KonstateradAreal, AvvikelseAreal och AvvikelseAndel, tag bort kolumnen ArealAvvikelse.\nCR esvel","date":"2016-12-05T12:02:17.993528Z","formattedDate":"20161205120217993528","result":"SUCCESS"},{"id":"2016-12-06_17-02-05","user":"esvel","msg":"Merged revision(s) 119479-119700, 117063-119482 from system/kontroll/atlas/trunk","date":"2016-12-06T14:46:04.203459Z","formattedDate":"20161206144604203459","result":"SUCCESS"},{"id":"2016-12-06_18-08-12","user":"esvel","msg":"Fix för reintegrate merge","date":"2016-12-06T16:57:16.105503Z","formattedDate":"20161206165716105503","result":"SUCCESS","coverage":67.3,"formattedCoverage":"67.3%"}]);
 }
 
 runit();

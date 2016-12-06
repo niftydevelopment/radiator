@@ -4,63 +4,32 @@ var figlet = require('figlet');
 var Promise = require('promise');
 
 var generate = function(builds) {
-  //console.log('generate report', builds[0].formatedCoverage);
-  //return;
+  //console.log('generate report', builds);
 
-  if (builds.length === 0) {//det finns ingen förändring sedan sist. Skriv inte ut något.
+  if (builds.length === 0) {//Det finns ingen förändring sedan sist. Skriv inte ut något.
     return;
   };
 
   builds = _.orderBy(builds, 'formattedDate');
-  var currentStatus = builds[0].result;
 
-  //var coverage = _.orderBy(builds, 'coverage');
-  //console.log(coverage);
+  var formattedCoverage = builds.filter(function(b) {
+    return b.formattedCoverage !== undefined;
+  })[0].formattedCoverage;
+  
+  printAtlas(builds[0].result, formattedCoverage).then(function() {
 
-  printAtlas(currentStatus, builds[0].formatedCoverage).then(function() {
-
-    var stars = 'Build history: ';
-    var prevBuild = null;
-    builds.forEach(function(b) {
-      //console.log(b.coverage);
-      if (b.result === 'SUCCESS') {
-        
-        if (!prevBuild) {
-          stars += '-';
-          return;
-        }
-
-        if (!b.coverage) {
-          stars += '-';
-          return;
-        }
-
-        if (b.coverage > prevBuild.coverage) {
-          stars += '*';
-        } else if (b.coverage > prevBuild.coverage) {
-          stars += ':-(';
-        } else {
-          stars += '-';
-        }
-
-      } else if (b.result === 'FAIL') {
-        stars += 'x';  
-      } else {
-        stars += '?';  
-      }
-      prevBuild = b;
-    });
-
-    console.log('');
-    console.log(stars);
-    console.log('');
+    printBuildHistory(builds);
 
     var failedBuids = getFailedBuildsInOrder(builds);
 
     builds = _.orderBy(builds, 'formattedDate');
-    for (var i = 0; i < 7; i++) {
-      printBuilds(builds[i]);
-    }
+
+    builds.forEach(function(b, i) {
+      if (i > 5) {
+        return;
+      }
+      printBuilds(b); 
+    });
     
     console.log(colors.green('**********************************************************'));
     if (failedBuids.length > 0) {
@@ -74,6 +43,44 @@ var generate = function(builds) {
 
 }
 
+
+var printBuildHistory = function(builds) {
+  var stars = 'Build history: ';
+  var prevBuild = null;
+  builds.forEach(function(b) {
+    //console.log(b.coverage);
+    if (b.result === 'SUCCESS') {
+      
+      if (!prevBuild) {
+        stars += '-,';
+        return;
+      }
+
+      if (!b.coverage) {
+        stars += '-,';
+        return;
+      }
+
+      if (b.coverage > prevBuild.coverage) {
+        stars += '*,';
+      } else if (b.coverage > prevBuild.coverage) {
+        stars += ':-(,';
+      } else {
+        stars += '-,';
+      }
+
+    } else if (b.result === 'FAIL') {
+      stars += 'x,';  
+    } else {
+      stars += '?,';  
+    }
+    prevBuild = b;
+  });
+
+  console.log('');
+  console.log(stars);
+  console.log('');
+}
 
 var getFailedBuildsInOrder = function(builds) {
 
@@ -98,15 +105,16 @@ var getFailedBuildsInOrder = function(builds) {
 }
 
 var printBuilds = function(build) {
+  //console.log('printBuilds', build);
 
   if (build.result !== 'FAIL') {
     console.log(colors.green('******************************************************'));
     console.log(colors.green(build.user));
-    console.log('Kommentar' + build.msg);
+    console.log('Kommentar: ' + build.msg);
   } else {
     console.log(colors.red('******************************************************'));
     console.log(colors.red(build.user));
-    console.log('Kommentar' + build.msg);
+    console.log('Kommentar: ' + build.msg);
   }
 } 
 

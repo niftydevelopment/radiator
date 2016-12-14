@@ -4,7 +4,7 @@ var BuildModel = require('./model.js');
 var fs = require('fs');
 
 var baseurl = 'https://utv.sjv.se/jenkins/view/kontroll/job/'
-var branch = 'atlas-snapshot-7.1';
+var branch = 'atlas-snapshot-trunk';
 var urlSuffix = '/api/json?pretty=true';
 
 var buildsUrl = baseurl + branch + urlSuffix;
@@ -25,13 +25,6 @@ var buildsUrl = baseurl + branch + urlSuffix;
           }
 
         }).finally(function() {
-
-          /*
-          var filtered = builds.filter(function(b) {
-            return b.result === 'FAILURE';
-          });
-          */
-
           resolve(builds);
         });
 

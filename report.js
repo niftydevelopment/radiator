@@ -10,25 +10,25 @@ var generate = function(builds) {
     return;
   };
 
-  builds = _.orderBy(builds, 'formattedDate');
+  builds = _.sortBy(builds, function(b) {
+    return -b.formattedDate;
+  });
 
-  var formattedCoverage = builds.filter(function(b) {
+  var lastBuild = builds.filter(function(b) {
     return b.formattedCoverage !== undefined;
-  })[0].formattedCoverage;
+  })[0];
   
-  printAtlas(builds[0].result, formattedCoverage).then(function() {
+  printAtlas(lastBuild, builds).then(function() {
 
     printBuildHistory(builds);
 
     var failedBuids = getFailedBuildsInOrder(builds);
 
-    builds = _.orderBy(builds, 'formattedDate');
-
     builds.forEach(function(b, i) {
       if (i > 5) {
         return;
       }
-      printBuilds(b); 
+      printBuilds(b, builds); 
     });
     
     console.log(colors.green('**********************************************************'));
@@ -47,6 +47,7 @@ var generate = function(builds) {
 var printBuildHistory = function(builds) {
   var stars = 'Build history: ';
   var prevBuild = null;
+
   builds.forEach(function(b) {
     //console.log(b.coverage);
     if (b.result === 'SUCCESS') {
@@ -104,34 +105,63 @@ var getFailedBuildsInOrder = function(builds) {
 
 }
 
-var printBuilds = function(build) {
+var printBuilds = function(build, builds) {
   //console.log('printBuilds', build);
-
   if (build.result !== 'FAIL') {
     console.log(colors.green('******************************************************'));
-    console.log(colors.green(build.user));
+    console.log(colors.green(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
   } else {
     console.log(colors.red('******************************************************'));
-    console.log(colors.red(build.user));
+    console.log(colors.red(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
   }
-} 
+}
 
-var printAtlas = function(status, coverage) {
+var printCoverageEffect = function(build, builds) {
+  var highestCoverage = _.maxBy(builds, function(b) {
+    return b.coverage;
+  }).coverage;
 
-  if (!coverage) {
-    coverage = '?';
+  var sad = highestCoverage > build.coverage;
+  var happy = highestCoverage < build.coverage;
+  var whatever = highestCoverage === build.coverage;
+
+  if (sad) {
+    return colors.red('AC säger Grrrr!!');
+  } else if (happy) {
+    return colors.green('AC är glad :-)');
+  } else {
+    return colors.gray('AC slår dig inte med en penna.');
   }
+}
+
+var printAtlas = function(lastBuild, builds) {
+  var status = lastBuild.result;
+  var formattedCoverage = lastBuild.formattedCoverage;
 
   var color = colors.green;
+  
+  if (!formattedCoverage) {
+    formattedCoverage = '?';
+  } else {
+    var highestCoverageBuild = _.maxBy(builds, 'coverage');
+
+    if (highestCoverageBuild.coverage > lastBuild.coverage) {
+      color = colors.red;
+    } else if (highestCoverageBuild.coverage === lastBuild.coverage) {
+      color = colors.gray;
+    }
+
+  }
+
   if (status === 'FAIL') {
     color = colors.red;
   }
 
   return new Promise(function(resolve) {
 
-    figlet('** A T L A S '+ coverage + ' **', function(err, data) {
+    figlet('** A T L A S ' + formattedCoverage + ' **', function(err, data) {
       console.log(color(data));
       resolve();
     });

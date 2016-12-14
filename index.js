@@ -13,17 +13,17 @@ var runit = function() {
     //console.log('running');
     
     pollJenkins.poll().then(function(builds) {
-      //console.log('poll is done ok', result.length);
+        //console.log('Jenkins is polled');
+
         pollSonar.poll(builds).then(function(decoratedBuilds) {
+          //console.log('Sonar is polled');
 
           savedata.savedata(decoratedBuilds).then(function(savedData) {
-            //console.log(decoratedBuilds);
-            //console.log('new data to print', savedData.length);
+            console.log('new data to print', savedData.length);
             report.generate(savedData);
             initialPrint = true;
           }, function(savedData) {
             //console.log('no new data to print', savedData.length);
-            //console.log(savedData);
 
             if (!initialPrint) {
               report.generate(savedData);
@@ -37,7 +37,7 @@ var runit = function() {
     });
 
     runit();
-  }, 1000);
+  }, 10000);
 }
 
 runit();

@@ -26,5 +26,8 @@
     "lodash": "^4.17.2",
     "promise": "^7.1.1",
     "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "node-rest-client": "^2.0.1"
   }
 }

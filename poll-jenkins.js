@@ -60,7 +60,7 @@ var buildsUrl = baseurl + branch + urlSuffix;
     return new Promise(function(resolve, reject) {
 
       var buildDetailsUrl = build.url + urlSuffix;
-      //console.log(buildDetailsUrl);
+      console.log(buildDetailsUrl);
       
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {

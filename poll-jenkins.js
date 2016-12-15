@@ -3,20 +3,27 @@ var Promise = require('promise');
 var BuildModel = require('./model.js');
 var fs = require('fs');
 
-var baseurl = 'https://utv.sjv.se/jenkins/view/kontroll/job/'
 var branch = 'atlas-snapshot-trunk';
 var urlSuffix = '/api/json?pretty=true';
 
-var buildsUrl = baseurl + branch + urlSuffix;
-
   var poll = function() {
-    //console.log('poll');
+    console.log('poll');
+    
+    var baseurl = 'https://utv.sjv.se/';
+    if (process.env.MOCK != null) {
+      baseurl = 'http://localhost:3000/'
+    }
+
+    baseurl += 'jenkins/view/kontroll/job/';
+    
+    var buildsUrl = baseurl + branch + urlSuffix;
     
     return new Promise(function(resolve, reject) {
       var builds = [];
       
-      getbuilds().then(function(result) {    
-
+      getbuilds(buildsUrl).then(function(result) {    
+  
+        
         Promise.all(result).then(function (res) {
           for (r in res) {
             if (res[r].changeSet.items.length > 0) {
@@ -35,13 +42,15 @@ var buildsUrl = baseurl + branch + urlSuffix;
     });
   }
 
-  var getbuilds = function() {
-
+  var getbuilds = function(buildsUrl) {
+    console.log('getbuilds');
+    
     return new Promise(function(resolve, reject) {
       var details = [];
 
       request(buildsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
+          
           var result = JSON.parse(body);
           for(b in result.builds) {
             details.push(buildDetails(result.builds[b]));
@@ -60,7 +69,8 @@ var buildsUrl = baseurl + branch + urlSuffix;
     return new Promise(function(resolve, reject) {
 
       var buildDetailsUrl = build.url + urlSuffix;
-      console.log(buildDetailsUrl);
+
+      buildDetails = 'http://localhost:3000/jenkins/view/kontroll/job/atlas-snapshot-trunk/5436/';
       
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {

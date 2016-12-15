@@ -1,4 +1,5 @@
 var Client = require('node-rest-client').Client;
+
 client = new Client();
 var Promise = require('promise');
 

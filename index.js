@@ -2,10 +2,12 @@ var colors        = require('colors');
 var program       = require('commander');
 var Promise       = require('promise');
 
-var pollJenkins   = require('./poll-jenkins.js');
-var pollSonar     = require('./poll-sonar.js');
+var jenkins   = require('./poll-jenkins.js');
+var jira   = require('./poll-jira.js');
+var sonar     = require('./poll-sonar.js');
 var savedata      = require('./savedata.js');
 var report        = require('./report.js');
+var parser        = require('./parser.js');
 
 
 var init = function() {
@@ -15,7 +17,7 @@ var init = function() {
   program
     .version('0.0.4')
     .description('AC 4 president!')
-    .option('-n, --numberofbuilds <n>', 'Antal builds som skall visas', 8)
+    .option('-n, --numberofbuilds <n>', 'Antal builds som skall visas')
     .option('-m, --mock', 'Kör mot mockat läge')
     .parse(process.argv);
 
@@ -33,7 +35,6 @@ var init = function() {
   console.log('Radiator startad:');
   if (program.mock) {
     console.log('  - i mockat läge');
-    console.log('>>>> ', process.env.MOCK);
   }
 
   console.log('  - %j antal builds visas', program.numberofbuilds);
@@ -60,7 +61,6 @@ var runit = function() {
     jenkins.poll()
       .then(jira.decorate)
       .then(sonar.decorate)
-      .then(saveData.save)
       .then(report.generate)
       .then(function() {
         //
@@ -68,7 +68,24 @@ var runit = function() {
         //
       });
     */
+
+    jenkins.poll()
+      .then(parser.decorate)
+      .then(jira.decorate)
+      .then(sonar.decorate)
+      .then(savedata.save)
+      .then(report.generate)
+      .then(function(result) {
+
+      console.log('>>>>>>', result[0].fullDisplayName);
     
+    }, function(error) {
+    
+        console.log(error);
+    
+    });
+    
+    /*
       pollJenkins.poll().then(function(builds) {
           //console.log('Jenkins is polled');
 
@@ -92,6 +109,7 @@ var runit = function() {
 
           });
       });
+      */
 
     runit();
   }, 1000);

@@ -91,7 +91,7 @@
         "commitId" : "120300",
         "timestamp" : 1481625620578,
         "date" : "2016-12-13T10:40:20.578991Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
+        "msg" : "PCAP-16232 bla bla bla",
         "paths" : [
           {
             "editType" : "edit",
@@ -448,7 +448,7 @@
         "commitId" : "120283",
         "timestamp" : 1481625611294,
         "date" : "2016-12-13T10:40:11.294846Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
+        "msg" : "PCAP-16232 bla bla bla",
         "paths" : [
           {
             "editType" : "edit",
@@ -476,4 +476,3 @@
   "mavenArtifacts" : null,
   "mavenVersionUsed" : "3.0.5"
 }
-0

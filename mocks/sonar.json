@@ -1,7 +1,3 @@
-/*
-http://vl-bygget-icc:9000/api/resources?metrics=ncloc,coverage&format=json
-*/
-
 [
    {
       "id":1,

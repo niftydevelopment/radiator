@@ -1,7 +1,7 @@
 {
   "name": "radiator",
   "version": "0.0.1",
-  "description": "Den som flest builds får bjuda på öl!",
+  "description": "Den som trachar flest builds får bjuda på öl!",
   "main": "index.js",
   "scripts": {
     "test": "test",

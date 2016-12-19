@@ -3,26 +3,18 @@ var Promise = require('promise');
 var BuildModel = require('./model.js');
 var fs = require('fs');
 
+
 var branch = 'atlas-snapshot-trunk';
 var urlSuffix = '/api/json?pretty=true';
 
   var poll = function() {
-    console.log('poll');
+    //console.log('poll Jenkins');
     
-    var baseurl = 'https://utv.sjv.se/';
-    if (process.env.MOCK != null) {
-      baseurl = 'http://localhost:3000/'
-    }
-
-    baseurl += 'jenkins/view/kontroll/job/';
-    
-    var buildsUrl = baseurl + branch + urlSuffix;
     
     return new Promise(function(resolve, reject) {
       var builds = [];
       
-      getbuilds(buildsUrl).then(function(result) {    
-  
+      getbuilds().then(function(result) {    
         
         Promise.all(result).then(function (res) {
           for (r in res) {
@@ -43,20 +35,43 @@ var urlSuffix = '/api/json?pretty=true';
   }
 
   var getbuilds = function(buildsUrl) {
-    console.log('getbuilds');
+    //console.log('getbuilds', buildsUrl);
+
+    var baseurl = 'https://utv.sjv.se/';
+    if (process.env.MOCK) {
+      baseurl = 'http://localhost:3000/'
+    }
+
+    baseurl += 'jenkins/view/kontroll/job/';
     
     return new Promise(function(resolve, reject) {
-      var details = [];
 
-      request(buildsUrl, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          
-          var result = JSON.parse(body);
-          for(b in result.builds) {
-            details.push(buildDetails(result.builds[b]));
-          }
-          resolve(details);
+
+      var builds = {};
+      
+      fs.readFile('./properties/builds.json', 'utf8', function (err, data) {
+        branches = data;
+
+        for (branch in branches) {
+
+          var buildsUrl = baseurl + branch.namnijenkins + urlSuffix;
+
+          var details = [];
+
+          request(buildsUrl, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              
+              var result = JSON.parse(body);
+              for(b in result.builds) {
+                details.push(buildDetails(result.builds[b]));
+              }
+              resolve(details);
+            }
+
+          });
+
         }
+
       });
 
     });
@@ -70,8 +85,12 @@ var urlSuffix = '/api/json?pretty=true';
 
       var buildDetailsUrl = build.url + urlSuffix;
 
-      buildDetails = 'http://localhost:3000/jenkins/view/kontroll/job/atlas-snapshot-trunk/5436/';
-      
+      if (process.env.MOCK) {
+        buildDetailsUrl = buildDetailsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');      
+      }
+
+      //console.log('> buildDetails', buildDetailsUrl);
+
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           //console.log(body);
@@ -93,6 +112,7 @@ var urlSuffix = '/api/json?pretty=true';
     o.date = res.changeSet.items[0].date;
     o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z
     o.result = res.result;
+    o.fullDisplayName = res.fullDisplayName;
     return o;
   }
 

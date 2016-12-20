@@ -57,7 +57,7 @@ var login = function() {
 }
 
 var getJiraInfo = function(build) {
-  console.log('   Jira: getJiraInfo');
+  //console.log('   Jira: getJiraInfo');
   
   return new Promise(function(resolve, reject) {
 
@@ -82,13 +82,12 @@ var getJiraInfo = function(build) {
 }
 
 var decorate = function(builds) {
-  console.log('Jira: decorate', builds.length);
+  //console.log('Jira: decorate', builds.length);
 
   return new Promise(function(resolve, reject) {
 
     login().then(function() {
-      console.log('   -----> ', builds);
-  
+      
       var decoratedBuilds = [];
 
       builds.forEach(function(b) {
@@ -107,7 +106,7 @@ var decorate = function(builds) {
 }
 
 var update = function(builds) {
-  console.log('Jira: update');
+  //console.log('Jira: update');
   //login
   //for each
       //update

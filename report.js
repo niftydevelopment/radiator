@@ -110,12 +110,14 @@ var printBuilds = function(build, builds) {
 
   if (build.result !== 'FAIL') {
     console.log(colors.green('******************************************************'));
+    console.log('Tidpunkt: ' + build.date.substring(0, 16));
     console.log(colors.green(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
     console.log('Planerad för version: ' + build.jira);
-    console.log('Commitad på: '+ build.fullDisplayName);
+    console.log('Commitad på: ' + build.fullDisplayName);
   } else {
     console.log(colors.red('******************************************************'));
+    console.log('Tidpunkt: ' + build.date.substring(0, 16));
     console.log(colors.red(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
 

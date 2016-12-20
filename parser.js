@@ -1,8 +1,7 @@
 var Promise = require('promise');
 
 var decorate = function(builds) {
-
-  console.log('Parser: decorate', builds.length);
+  //console.log('Parser: decorate', builds.length);
   
   return new Promise(function(resolve, reject) {
   	

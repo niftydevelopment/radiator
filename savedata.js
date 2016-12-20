@@ -6,7 +6,7 @@ var historyFile = './history.json';
 
 var savedata = function(newBuilds) {
   
-  console.log('SaveData: savedata');
+  //console.log('SaveData: savedata');
   
   return new Promise(function(resolve, reject) {
 
@@ -14,11 +14,11 @@ var savedata = function(newBuilds) {
   
       var data = uniondata(storedBuilds, newBuilds);
       
-      console.log('   Will update stored data:', storedBuilds.length !== data.length);
+      //console.log('   Will update stored data:', storedBuilds.length !== data.length);
 
       if (storedBuilds.length === data.length) {
         //console.log('No new builds.');
-        resolve(data);
+        reject(data);
         return;
       }
 

@@ -52,71 +52,35 @@ init().then(function() {
   runit();
 });
 
-var initialPrint = false;
+var resultOfPoll = [];
 
 var runit = function() {
 
   setTimeout(function() {
     console.log('running');
-    /*
-    jenkins.poll()
-      .then(jira.decorate)
-      .then(sonar.decorate)
-      .then(report.generate)
-      .then(function() {
-        //
-      }).finally(function() {
-        //
-      });
-    
-      .then(report.generate)
-
-      .then(jira.decorate)
-      .then(jira.update)
-      .then(sonar.decorate)
-      .then(savedata.save)
-
-    */
 
     properties.fetch()
       .then(jenkins.poll)
       .then(parser.decorate)
-
+      .then(jira.decorate)
+      .then(jira.update)
+      .then(sonar.decorate)
       .then(function(result) {
 
-      console.log('>>>>>>', result.length);
+      //console.log('>>>>>>', result.length);
+      resultOfPoll = result;
     
     }, function(error) {
-    
-        console.log('error');
-    
-    });
-    
-    /*
-      pollJenkins.poll().then(function(builds) {
-          //console.log('Jenkins is polled');
+      console.log('error');
+    }).finally(function() {
 
-          pollSonar.poll(builds).then(function(decoratedBuilds) {
-            //console.log('Sonar is polled');
-
-            savedata.savedata(decoratedBuilds).then(function(savedData) {
-              console.log('new data to print', savedData.length);
-              report.generate(savedData);
-              initialPrint = true;
-            }, function(savedData) {
-              //console.log('no new data to print', savedData.length);
-
-              if (!initialPrint) {
-                report.generate(savedData);
-                initialPrint = true;
-              }
-
-            });
-
-
-          });
+      savedata.save(resultOfPoll).then(function() {
+        report.generate(resultOfPoll);
+      }, function() {
+        //
       });
-      */
+
+    });
 
     runit();
   }, 1000);

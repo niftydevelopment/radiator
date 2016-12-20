@@ -8,33 +8,48 @@ var branch = 'atlas-snapshot-trunk';
 var urlSuffix = '/api/json?pretty=true';
 
 var poll = function(jobs) {
-  console.log('Jenkins: poll', jobs.length);
+  //console.log('Jenkins: poll', jobs.length);
 
   return new Promise(function(resolve, reject) {
 
-    var builds = [];  
-    var buildDetails = [];   
+    var jobDetails = [];  
+    var builds = [];
+    var buildDetails = [];
+    var buildModels = [];
+
     jobs.forEach(function(j) {
-      builds.push(getBuilds(j.jUrl)); //ett promise med [] av promises
+      jobDetails.push(getBuilds(j.jUrl));
     });
 
-    console.log('>>>>>>>>>' + builds.length, builds.length);      
+    Promise.all(jobDetails).then(function(result) {      
+      
+      result.forEach(function(detail) {
+        
+        detail.builds.forEach(function(bbb) {
+          builds.push(bbb);  
+        });
 
-    Promise.all(builds).then(function (res) {
-      
-      console.log('<<<<<<<<<<<<<<<', builds.length);
-      
-      for (r in res) {
-        if (res[r].changeSet.items.length > 0) {
-          buildDetails.push.apply(buildModel(res[r]));
+      });
+
+      //console.log('>>>>>>>>>>>>', body);
+
+      builds.forEach(function(b) {
+        buildDetails.push(getBuildDetails(b));
+      });
+
+      Promise.all(buildDetails).then(function(res) {
+
+        for (r in res) {
+          if (res[r].changeSet.items.length > 0) {
+            buildModels.push(buildModel(res[r]));
+          }
         }
-      }
 
-    }).finally(function() {
-      console.log('>>>>>>>>>>>>>>>>', buildDetails.length);
-      
-      resolve(buildDetails);
-    });
+      }).finally(function() {
+        resolve(buildModels);
+      });
+
+    })
 
 
   });
@@ -42,7 +57,7 @@ var poll = function(jobs) {
 }
 
   var getBuilds = function(jenkinsUrl) {
-    console.log('   Jenkins: getBuilds', jenkinsUrl);
+    //console.log('   Jenkins: getBuilds', jenkinsUrl);
 
     return new Promise(function(resolve, reject) {
 
@@ -51,16 +66,8 @@ var poll = function(jobs) {
       request(jenkinsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
 
-          var result = JSON.parse(body);
-          
-          //console.log('>>>>>>>>>>>>', body);
-
-          for(b in result.builds) {
-            console.log('something', b);
-            details.push.apply(details, buildDetails(result.builds[b]));
-          }
-
-          resolve(details);
+          var build = JSON.parse(body);
+          resolve(build);
         }
       });
 
@@ -69,7 +76,7 @@ var poll = function(jobs) {
   }
 
 
-  var buildDetails = function(build) {
+  var getBuildDetails = function(build) {
     //console.log('   Jenkins: buildDetails:', build);
 
     return new Promise(function(resolve, reject) {
@@ -104,6 +111,8 @@ var poll = function(jobs) {
     o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z
     o.result = res.result;
     o.fullDisplayName = res.fullDisplayName;
+    
+    //console.log('-------------', o.fullDisplayName, o.user);
     return o;
   }
 

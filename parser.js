@@ -2,8 +2,7 @@ var Promise = require('promise');
 
 var decorate = function(builds) {
 
-  console.log('decoreate');
-
+  console.log('Parser: decorate', builds.length);
   
   return new Promise(function(resolve, reject) {
   	

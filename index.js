@@ -2,9 +2,10 @@ var colors        = require('colors');
 var program       = require('commander');
 var Promise       = require('promise');
 
-var jenkins   = require('./poll-jenkins.js');
-var jira   = require('./poll-jira.js');
-var sonar     = require('./poll-sonar.js');
+var properties    = require('./properties.js');
+var jenkins       = require('./poll-jenkins.js');
+var jira          = require('./poll-jira.js');
+var sonar         = require('./poll-sonar.js');
 var savedata      = require('./savedata.js');
 var report        = require('./report.js');
 var parser        = require('./parser.js');
@@ -67,21 +68,27 @@ var runit = function() {
       }).finally(function() {
         //
       });
-    */
+    
+      .then(report.generate)
 
-    jenkins.poll()
-      .then(parser.decorate)
       .then(jira.decorate)
+      .then(jira.update)
       .then(sonar.decorate)
       .then(savedata.save)
-      .then(report.generate)
+
+    */
+
+    properties.fetch()
+      .then(jenkins.poll)
+      .then(parser.decorate)
+
       .then(function(result) {
 
-      console.log('>>>>>>', result[0].fullDisplayName);
+      console.log('>>>>>>', result.length);
     
     }, function(error) {
     
-        console.log(error);
+        console.log('error');
     
     });
     

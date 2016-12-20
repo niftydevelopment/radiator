@@ -112,14 +112,14 @@ var printBuilds = function(build, builds) {
     console.log(colors.green('******************************************************'));
     console.log(colors.green(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
-    console.log('Planerad för version: ' + build.jiraPlannedForVersion);
+    console.log('Planerad för version: ' + build.jira);
     console.log('Commitad på: '+ build.fullDisplayName);
   } else {
     console.log(colors.red('******************************************************'));
     console.log(colors.red(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
 
-    console.log('Planerad för version: ' + build.jiraPlannedForVersion);
+    console.log('Planerad för version: ' + build.jira);
     console.log('Commitad på: '+ build.fullDisplayName);
   }
 }

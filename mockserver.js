@@ -46,13 +46,14 @@ app.get('/api/resources', function (req, res) {
   res.send(sonar);
 });
 
-app.get('/jenkins/view/kontroll/job/atlas-snapshot-trunk/api/json/', function (req, res) {
-  //console.log('pollar jenkins');
+//\\d+/api/json/
+app.get('/jenkins/view/kontroll/job/:job/api/json/', function (req, res) {
+  console.log('pollar jenkins');
   res.send(jenkinsBuilds)
 });
 
-app.get('/jenkins/view/kontroll/job/*', function (req, res) {
-  //console.log('Ber om detaljerna från jenkins');
+app.get('/jenkins/view/kontroll/job/:job/*', function (req, res) {
+  console.log('Ber om detaljerna från jenkins');
   res.send(jenkinsBuildDetails)
 });
 

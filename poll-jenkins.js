@@ -7,71 +7,61 @@ var fs = require('fs');
 var branch = 'atlas-snapshot-trunk';
 var urlSuffix = '/api/json?pretty=true';
 
-  var poll = function() {
-    //console.log('poll Jenkins');
-    
-    
-    return new Promise(function(resolve, reject) {
-      var builds = [];
+var poll = function(jobs) {
+  console.log('Jenkins: poll', jobs.length);
+
+  return new Promise(function(resolve, reject) {
+
+    var builds = [];  
+    var buildDetails = [];   
+    jobs.forEach(function(j) {
+      builds.push(getBuilds(j.jUrl)); //ett promise med [] av promises
+    });
+
+    console.log('>>>>>>>>>' + builds.length, builds.length);      
+
+    Promise.all(builds).then(function (res) {
       
-      getbuilds().then(function(result) {    
-        
-        Promise.all(result).then(function (res) {
-          for (r in res) {
-            if (res[r].changeSet.items.length > 0) {
-              builds.push(buildModel(res[r]));
-            }
+      console.log('<<<<<<<<<<<<<<<', builds.length);
+      
+      for (r in res) {
+        if (res[r].changeSet.items.length > 0) {
+          buildDetails.push.apply(buildModel(res[r]));
+        }
+      }
+
+    }).finally(function() {
+      console.log('>>>>>>>>>>>>>>>>', buildDetails.length);
+      
+      resolve(buildDetails);
+    });
+
+
+  });
+
+}
+
+  var getBuilds = function(jenkinsUrl) {
+    console.log('   Jenkins: getBuilds', jenkinsUrl);
+
+    return new Promise(function(resolve, reject) {
+
+      var details = [];
+
+      request(jenkinsUrl, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+
+          var result = JSON.parse(body);
+          
+          //console.log('>>>>>>>>>>>>', body);
+
+          for(b in result.builds) {
+            console.log('something', b);
+            details.push.apply(details, buildDetails(result.builds[b]));
           }
 
-        }).finally(function() {
-          resolve(builds);
-        });
-
-      });
-
-
-
-    });
-  }
-
-  var getbuilds = function(buildsUrl) {
-    //console.log('getbuilds', buildsUrl);
-
-    var baseurl = 'https://utv.sjv.se/';
-    if (process.env.MOCK) {
-      baseurl = 'http://localhost:3000/'
-    }
-
-    baseurl += 'jenkins/view/kontroll/job/';
-    
-    return new Promise(function(resolve, reject) {
-
-
-      var builds = {};
-      
-      fs.readFile('./properties/builds.json', 'utf8', function (err, data) {
-        branches = data;
-
-        for (branch in branches) {
-
-          var buildsUrl = baseurl + branch.namnijenkins + urlSuffix;
-
-          var details = [];
-
-          request(buildsUrl, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-              
-              var result = JSON.parse(body);
-              for(b in result.builds) {
-                details.push(buildDetails(result.builds[b]));
-              }
-              resolve(details);
-            }
-
-          });
-
+          resolve(details);
         }
-
       });
 
     });
@@ -80,6 +70,7 @@ var urlSuffix = '/api/json?pretty=true';
 
 
   var buildDetails = function(build) {
+    //console.log('   Jenkins: buildDetails:', build);
 
     return new Promise(function(resolve, reject) {
 

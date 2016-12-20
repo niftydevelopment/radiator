@@ -3,7 +3,7 @@ var Promise = require('promise');
 
 var poll = function(builds) {
   
-  console.log('get stuff from Sonar');
+  console.log('Sonar: poll');
   
   var baseurl = 'http://vl-bygget-icc:9000/';
   if (process.env.MOCK) {

@@ -6,16 +6,20 @@ var historyFile = './history.json';
 
 var savedata = function(newBuilds) {
   
+  console.log('SaveData: savedata');
+  
   return new Promise(function(resolve, reject) {
 
     readstoreddata().then(function(storedBuilds) {    
+  
       var data = uniondata(storedBuilds, newBuilds);
       
-      //console.log('Will update stored data:', storedBuilds.length !== data.length);
+      console.log('   Will update stored data:', storedBuilds.length !== data.length);
 
       if (storedBuilds.length === data.length) {
         //console.log('No new builds.');
-        reject(data);
+        resolve(data);
+        return;
       }
 
       fs.writeFile(historyFile, JSON.stringify(data), function(err) {
@@ -38,11 +42,13 @@ var readstoreddata = function() {
   return new Promise(function(resolve, reject) {
     
     fs.readFile(historyFile, 'utf8', function (err, storedBuilds) {
+
       if (!storedBuilds) {
         storedBuilds = [];
       } else {
         storedBuilds = JSON.parse(storedBuilds);
       }
+
       resolve(storedBuilds);
     });
 
@@ -51,4 +57,4 @@ var readstoreddata = function() {
   
 }
 
-exports.savedata = savedata;
+exports.save = savedata;

@@ -44,7 +44,7 @@
          "active":true
       },
       "created":"2016-12-02T15:53:20.000+0100",
-      "updated":"2016-12-14T16:03:00.000+0100",
+      "updated":"2016-12-21T08:43:41.000+0100",
       "description":"*VOLYM*\r\nVersion 7.0.8.R 2016-11-29 16:35\r\nKund/-Journalnummer: S3461\r\nLän: Flera\r\nStödår/Kontrollår: 2015\r\nInloggad som: SHPER kontrollant\r\nKOntrollform: KOMPUT-DJUR\r\n\r\n\r\n*Felbeskrivning*\r\nFel kommer från Jorden För S2110 så ser jorden att brukaren har Tackor och förväntar sig 00606 i det sammanställda resultatet men det skickas inte.\r\nhttp://loadvolicc.intern.jordbruksverket.se/services/rest/kontrollpaplats/kontrollinfo/sammanstalltkontrollresultat/194010052704/00/2015?stodformList=KOMP\r\nHar sökt fram några brukare 2015 som alla i stödinfo har både nöt och Får eller getter .\r\nFör : \r\n| S2455 |194412216857|\r\n|X1249|194110227719|\r\nså kommer 00606 med för:\r\n|S2110|194112296258|\r\n|Y4184|194012087831|\r\n|G1376|194010052704|\r\nSå saknas 00606.\r\nTog ut S3461, 195509036256, för KOMPUT-DJUR i volym och fick inte med dessa kontrollpunkter i volym idag med senaste grunddata version.\r\nTog sedan ut FARGET och det fungerade.\r\nKollat  kontrollobjekt i databasen mellan S3461 och X1249 _och_ för S3461 som inte fungerar kan jag se att inget kontrollobjekt med kontrollobjektstyp = DJURSLAGSBESATTNING skapats  _som_ innehåller utbetalning.typ = KOMPUT och djurslagstyp = FAR.\r\n\r\n\r\n\r\n*Förväntat resultat*\r\nSka få med kontrollpunkter för  00606 för alla med Tackor/Getter i stödinfo.\r\n\r\n*Konsekvens*\r\nJorden få felaktigt resultat /Atlas kontrollerar inte allt.\r\n\r\n*Workaround*\r\nIngen känd",
       "priority":{
          "self":"https://etjanst.sjv.se/jira/rest/api/2/priority/1",
@@ -64,11 +64,11 @@
 
       ],
       "status":{
-         "self":"https://etjanst.sjv.se/jira/rest/api/2/status/10000",
-         "description":"Ärendet har skickats till utvecklare för vidare utredning",
-         "iconUrl":"https://etjanst.sjv.se/jira/images/icons/statuses/email.png",
-         "name":"Skickat till utvecklare",
-         "id":"10000"
+         "self":"https://etjanst.sjv.se/jira/rest/api/2/status/5",
+         "description":"Ärendet är klart för test.",
+         "iconUrl":"https://etjanst.sjv.se/jira/images/icons/statuses/resolved.png",
+         "name":"Klart för test (Löst)",
+         "id":"5"
       },
       "labels":[
          "CCB",
@@ -100,8 +100,8 @@
          "progress":0,
          "total":0
       },
-      "lastViewed":"2016-12-14T16:49:37.899+0100",
-      "customfield_10722":"55249",
+      "lastViewed":"2016-12-21T14:54:43.044+0100",
+      "customfield_10722":"55035",
       "customfield_10721":null,
       "components":[
          {
@@ -111,12 +111,12 @@
          }
       ],
       "customfield_10720":[
-         "com.atlassian.greenhopper.service.sprint.Sprint@1c58e12e[rapidViewId=808,state=FUTURE,name=S18: 12/12 v50-v1 ver 8.0,startDate=<null>,endDate=<null>,completeDate=<null>,id=544]"
+         "com.atlassian.greenhopper.service.sprint.Sprint@68a564ed[rapidViewId=808,state=ACTIVE,name=S18: 12/12 v50-v1 ver 8.0,startDate=2016-12-13T08:00:48.371+01:00,endDate=2017-01-09T08:00:00.000+01:00,completeDate=<null>,id=544]"
       ],
       "comment":{
          "startAt":0,
-         "maxResults":7,
-         "total":7,
+         "maxResults":8,
+         "total":8,
          "comments":[
             {
                "self":"https://etjanst.sjv.se/jira/rest/api/2/issue/160155/comment/330641",
@@ -348,6 +348,39 @@
                },
                "created":"2016-12-09T09:33:10.000+0100",
                "updated":"2016-12-09T12:48:40.000+0100"
+            },
+            {
+               "self":"https://etjanst.sjv.se/jira/rest/api/2/issue/160155/comment/333599",
+               "id":"333599",
+               "author":{
+                  "self":"https://etjanst.sjv.se/jira/rest/api/2/user?username=bsann",
+                  "name":"bsann",
+                  "emailAddress":"Barbro.Sanner@jordbruksverket.se",
+                  "avatarUrls":{
+                     "16x16":"https://etjanst.sjv.se/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                     "24x24":"https://etjanst.sjv.se/jira/secure/useravatar?size=small&avatarId=10122",
+                     "32x32":"https://etjanst.sjv.se/jira/secure/useravatar?size=medium&avatarId=10122",
+                     "48x48":"https://etjanst.sjv.se/jira/secure/useravatar?avatarId=10122"
+                  },
+                  "displayName":"Barbro Sanner",
+                  "active":true
+               },
+               "body":"Testat S3461, År 2015, Test1 Version: 8.0.0-SNAPSHOT, BuildTime: 2016-12-19 13:06\nKontrollpunkt 00606 kommer nu med. Testade att i registervyn ändra antalet får. Detta slår också igenom.\nStänger dock inte denna jira ännu då vi bör kolla i Volym eller Dockermiljön hur det blir när man tar ut nytt protokoll (KOMPUT) på en brukare där det tidigare protokollet felaktigt saknar kontrollpunkt 00606. ",
+               "updateAuthor":{
+                  "self":"https://etjanst.sjv.se/jira/rest/api/2/user?username=bsann",
+                  "name":"bsann",
+                  "emailAddress":"Barbro.Sanner@jordbruksverket.se",
+                  "avatarUrls":{
+                     "16x16":"https://etjanst.sjv.se/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                     "24x24":"https://etjanst.sjv.se/jira/secure/useravatar?size=small&avatarId=10122",
+                     "32x32":"https://etjanst.sjv.se/jira/secure/useravatar?size=medium&avatarId=10122",
+                     "48x48":"https://etjanst.sjv.se/jira/secure/useravatar?avatarId=10122"
+                  },
+                  "displayName":"Barbro Sanner",
+                  "active":true
+               },
+               "created":"2016-12-21T08:43:41.000+0100",
+               "updated":"2016-12-21T08:43:41.000+0100"
             }
          ]
       },
@@ -364,8 +397,13 @@
             "released":false
          }
       ],
-      "resolution":null,
-      "resolutiondate":null,
+      "resolution":{
+         "self":"https://etjanst.sjv.se/jira/rest/api/2/resolution/1",
+         "id":"1",
+         "description":"A fix for this issue is checked into the tree and tested.",
+         "name":"Fixed"
+      },
+      "resolutiondate":"2016-12-14T17:04:52.000+0100",
       "customfield_10122":null,
       "aggregatetimeoriginalestimate":null,
       "customfield_10123":null,
@@ -388,7 +426,19 @@
          ]
       },
       "customfield_10061":null,
-      "assignee":null,
+      "assignee":{
+         "self":"https://etjanst.sjv.se/jira/rest/api/2/user?username=fwin",
+         "name":"fwin",
+         "emailAddress":"Fabian.Winquist@jordbruksverket.se",
+         "avatarUrls":{
+            "16x16":"https://etjanst.sjv.se/jira/secure/useravatar?size=xsmall&ownerId=fwin&avatarId=14002",
+            "24x24":"https://etjanst.sjv.se/jira/secure/useravatar?size=small&ownerId=fwin&avatarId=14002",
+            "32x32":"https://etjanst.sjv.se/jira/secure/useravatar?size=medium&ownerId=fwin&avatarId=14002",
+            "48x48":"https://etjanst.sjv.se/jira/secure/useravatar?ownerId=fwin&avatarId=14002"
+         },
+         "displayName":"Fabian Winquist",
+         "active":true
+      },
       "attachment":[
 
       ],

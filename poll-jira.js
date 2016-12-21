@@ -5,7 +5,7 @@ var Promise = require('promise');
 
 var loginArgs = {
   data: {
-    "username": "",
+    "username": "dsin",
     "password": ""
   },
   headers: {
@@ -45,9 +45,10 @@ var login = function() {
         };
 
         //console.log('succesfully logged in, session:', data.session);
-        resolve(session);
+        resolve(searchArgs);
 
       } else {
+        //console.log(data);
         reject('Login failed :(');
       }
     });
@@ -56,8 +57,8 @@ var login = function() {
 
 }
 
-var getJiraInfo = function(build) {
-  //console.log('   Jira: getJiraInfo');
+var getJiraInfo = function(build, searchArgs) {
+  //console.log('   Jira: getJiraInfo', build.jira);
   
   return new Promise(function(resolve, reject) {
 
@@ -66,14 +67,14 @@ var getJiraInfo = function(build) {
       baseurl = 'http://localhost:3000/'
     }
 
-    //console.log(baseurl + "jira/rest/api/2/issue/PCAP-17054");
-
-    // Make the request return the search results, passing the header information including the cookie.
-    client.get(baseurl + "jira/rest/api/2/issue/PCAP-17054", function(searchResult, response) {
-        //console.log('search result:', searchResult);
-        build.jiraPlannedForVersion = 'version 123';
-        //console.log('search result:', build.jira);
-        
+    var url = baseurl + "jira/rest/api/2/issue/" + build.jira;
+    //console.log('------------------->' , url);
+    client.get(url, searchArgs, 
+      function(searchResult, response) {
+        build.jiraPlannedForVersion = null;
+        if (searchResult.fields && searchResult.fields.fixVersions && searchResult.fields.fixVersions.length > 0) {
+          build.jiraPlannedForVersion = searchResult.fields.fixVersions[0].name;
+        }
         resolve(build);
     });
 
@@ -86,12 +87,12 @@ var decorate = function(builds) {
 
   return new Promise(function(resolve, reject) {
 
-    login().then(function() {
+    login().then(function(searchArgs) {
       
       var decoratedBuilds = [];
 
       builds.forEach(function(b) {
-        decoratedBuilds.push(getJiraInfo(b));
+        decoratedBuilds.push(getJiraInfo(b, searchArgs));
       });
 
       Promise.all(decoratedBuilds).then(function(result) {
@@ -99,6 +100,9 @@ var decorate = function(builds) {
       });
             
 
+    }, function(error) {
+      //console.log(error);
+      resolve(builds);
     });
 
   });

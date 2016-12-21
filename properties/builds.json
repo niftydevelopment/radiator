@@ -1,1 +1,4 @@
-[{"jenkins":"trunk","jira":"7.1"},{"jenkins":"8.0-snapshot","jira":"8.1"}]
+[
+	{"jenkins":"atlas-snapshot-trunk","jira":"Atlas 8.0"},
+	{"jenkins":"atlas-snapshot-7.0.1","jira":"Atlas 7.1"}
+]

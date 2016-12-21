@@ -70,7 +70,7 @@ var printBuildHistory = function(builds) {
         stars += '-,';
       }
 
-    } else if (b.result === 'FAIL') {
+    } else if (b.result === 'FAILURE') {
       stars += 'x,';  
     } else {
       stars += '?,';  
@@ -86,7 +86,7 @@ var printBuildHistory = function(builds) {
 var getFailedBuildsInOrder = function(builds) {
 
   var failedBuilds = builds.filter(function(b) {
-   return b.result === 'FAIL';
+   return b.result === 'FAILURE';
   });
   
   if (failedBuilds.length > 0) {
@@ -108,12 +108,12 @@ var getFailedBuildsInOrder = function(builds) {
 var printBuilds = function(build, builds) {
   //console.log('printBuilds', build);
 
-  if (build.result !== 'FAIL') {
+  if (build.result !== 'FAILURE') {
     console.log(colors.green('******************************************************'));
     console.log('Tidpunkt: ' + build.date.substring(0, 16));
     console.log(colors.green(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
-    console.log('Planerad för version: ' + build.jira);
+    console.log('Planerad för version: ' + build.jiraPlannedForVersion);
     console.log('Commitad på: ' + build.fullDisplayName);
   } else {
     console.log(colors.red('******************************************************'));
@@ -121,7 +121,7 @@ var printBuilds = function(build, builds) {
     console.log(colors.red(build.user), printCoverageEffect(build, builds));
     console.log('Kommentar: ' + build.msg);
 
-    console.log('Planerad för version: ' + build.jira);
+    console.log('Planerad för version: ' + build.jiraPlannedForVersion);
     console.log('Commitad på: '+ build.fullDisplayName);
   }
 }
@@ -163,7 +163,7 @@ var printAtlas = function(lastBuild, builds) {
 
   }
 
-  if (status === 'FAIL') {
+  if (status === 'FAILURE') {
     color = colors.red;
   }
 

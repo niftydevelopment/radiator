@@ -103,6 +103,7 @@ var poll = function(jobs) {
 
 
   var buildModel = function(res) {
+    //console.log(res.result);
     var o =  {};
     o.id = res.id;
     o.user = res.changeSet.items[0].user;

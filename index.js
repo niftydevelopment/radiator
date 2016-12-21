@@ -52,36 +52,44 @@ init().then(function() {
   runit();
 });
 
+var startupReport = true;
 var resultOfPoll = [];
 
 var runit = function() {
 
   setTimeout(function() {
-    console.log('running');
+    //console.log('running');
 
     properties.fetch()
       .then(jenkins.poll)
       .then(parser.decorate)
-      .then(jira.decorate)
-      .then(jira.update)
       .then(sonar.decorate)
+      .then(jira.decorate)
+
       .then(function(result) {
 
       //console.log('>>>>>>', result.length);
       resultOfPoll = result;
     
     }, function(error) {
-      console.log('error');
+      //console.log('error');
     }).finally(function() {
-
+      //console.log('finally', resultOfPoll.length);
+      
       savedata.save(resultOfPoll).then(function() {
+        //console.log('new data to report', result.length);
         report.generate(resultOfPoll);
-      }, function() {
-        //
+        startupReport = false;
+      }, function(result) {
+        //console.log('NO new data to report', result.length);
+        if (startupReport) {
+          report.generate(resultOfPoll);
+          startupReport = false;
+        }
       });
 
     });
 
     runit();
-  }, 1000);
+  }, 10000);
 }

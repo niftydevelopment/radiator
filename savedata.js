@@ -4,27 +4,22 @@ var _ = require('lodash');
 
 var historyFile = './history.json';
 
-var savedata = function(newBuilds) {
+var savedata = function(buildsFromJenkins) {
   
   //console.log('SaveData: savedata');
   
   return new Promise(function(resolve, reject) {
 
     readstoreddata().then(function(storedBuilds) {    
-  
-      var data = uniondata(storedBuilds, newBuilds);
-      
-      //console.log('   Will update stored data:', storedBuilds.length !== data.length);
+      var unionOfBuilds = uniondata(storedBuilds, buildsFromJenkins);
 
-      if (storedBuilds.length === data.length) {
-        //console.log('No new builds......');
-        reject(data);
+      if (storedBuilds.length === unionOfBuilds.length) {
+        reject(unionOfBuilds);
         return;
       }
 
-      fs.writeFile(historyFile, JSON.stringify(data), function(err) {
-        //console.log('data is stored. Length:', data.length);
-        resolve(data);
+      fs.writeFile(historyFile, JSON.stringify(unionOfBuilds), function(err) {
+        resolve(unionOfBuilds);
       });
 
     });
@@ -53,8 +48,20 @@ var readstoreddata = function() {
     });
 
   });
-
   
 }
 
+var createunion = function(buildsFromJenkins) {
+
+  return new Promise(function(resolve, reject) {
+
+    readstoreddata().then(function(storedBuilds)   {
+      resolve(uniondata(storedBuilds, buildsFromJenkins));
+    });
+
+  });
+
+}
+
 exports.save = savedata;
+exports.uniondata = createunion;

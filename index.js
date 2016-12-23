@@ -78,18 +78,22 @@ var runit = function() {
       
       savedata.save(resultOfPoll).then(function() {
         //console.log('new data to report', result.length);
-        report.generate(resultOfPoll);
+
+        savedata.uniondata(resultOfPoll).then(report.generate);
         startupReport = false;
+
       }, function(result) {
         //console.log('NO new data to report', result.length);
+
         if (startupReport) {
-          report.generate(resultOfPoll);
+          savedata.uniondata(resultOfPoll).then(report.generate);
           startupReport = false;
         }
+
       });
 
     });
 
     runit();
-  }, 10000);
+  }, 1000);
 }

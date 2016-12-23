@@ -111,40 +111,25 @@ var printBuilds = function(build, builds) {
   if (build.result !== 'FAILURE') {
     console.log(colors.green('******************************************************'));
     console.log('Tidpunkt: ' + build.date.substring(0, 16));
-    console.log(colors.green(build.user), printCoverageEffect(build, builds));
-    console.log('Kommentar: ' + build.msg);
+    console.log(colors.green(build.user), build.msg);
     console.log('Planerad för version: ' + build.jiraPlannedForVersion);
     console.log('Commitad på: ' + build.fullDisplayName);
   } else {
     console.log(colors.red('******************************************************'));
     console.log('Tidpunkt: ' + build.date.substring(0, 16));
-    console.log(colors.red(build.user), printCoverageEffect(build, builds));
-    console.log('Kommentar: ' + build.msg);
+    console.log(colors.red(build.user), build.msg);
 
     console.log('Planerad för version: ' + build.jiraPlannedForVersion);
     console.log('Commitad på: '+ build.fullDisplayName);
   }
 }
 
-var printCoverageEffect = function(build, builds) {
-  var highestCoverage = _.maxBy(builds, function(b) {
-    return b.coverage;
-  }).coverage;
-
-  var sad = highestCoverage > build.coverage;
-  var happy = highestCoverage < build.coverage;
-  var whatever = highestCoverage === build.coverage;
-
-  if (sad) {
-    return colors.red('AC säger Grrrr!!');
-  } else if (happy) {
-    return colors.green('AC är glad :-)');
-  } else {
-    return colors.gray('AC slår dig inte med en penna.');
-  }
-}
-
 var printAtlas = function(lastBuild, builds) {
+
+  builds = builds.filter(function(b) { //disregard latest
+    return b.id !== lastBuild.id;
+  });
+
   var status = lastBuild.result;
   var formattedCoverage = lastBuild.formattedCoverage;
 
@@ -154,11 +139,14 @@ var printAtlas = function(lastBuild, builds) {
     formattedCoverage = '?';
   } else {
     var highestCoverageBuild = _.maxBy(builds, 'coverage');
+    var lowestCoverageBuild = _.minBy(builds, 'coverage');
 
-    if (highestCoverageBuild.coverage > lastBuild.coverage) {
+    if (lowestCoverageBuild.coverage > lastBuild.coverage) {
       color = colors.red;
-    } else if (highestCoverageBuild.coverage === lastBuild.coverage) {
-      color = colors.gray;
+    } else if (highestCoverageBuild.coverage >= lastBuild.coverage) {
+      color = colors.green;
+    } else if (highestCoverageBuild.coverage > lastBuild.coverage) {
+      color = colors.yellow;
     }
 
   }

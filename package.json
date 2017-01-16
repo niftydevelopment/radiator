@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "node index.js",
-    "dev": "nodemon mockserver.js"
+    "start": "node ./app/index.js",
+    "dev-server": "nodemon ./app/mockserver.js",
+    "dev-app": "nodemon ./app/index.js mock",
+    "dev": "concurrently --kill-others \"nodemon ./app/mockserver.js\" \"nodemon ./app/index.js mock\""
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "concurrently": "^3.1.0",
     "express": "^4.14.0",
     "mocha": "^3.2.0",
     "node-rest-client": "^2.0.1",

@@ -4,26 +4,26 @@ var fs = require('fs');
 var app = express();
 
 var jenkinsBuilds = {};
-fs.readFile('./mocks/jenkins.json', 'utf8', function (err, data) {
+fs.readFile('./app/mocks/jenkins.json', 'utf8', function (err, data) {
   //jenkinsBuilds = JSON.parse(data);
   jenkinsBuilds = data;
 });
 
 var jenkinsBuildDetails = {};
-fs.readFile('./mocks/jenkins-details.json', 'utf8', function (err, data) {
+fs.readFile('./app/mocks/jenkins-details.json', 'utf8', function (err, data) {
   //jenkinsBuilds = JSON.parse(data);
   jenkinsBuildDetails = data;
 });
 
 
 var jira = {};
-fs.readFile('./mocks/jira.json', 'utf8', function (err, data) {
+fs.readFile('./app/mocks/jira.json', 'utf8', function (err, data) {
   //jenkinsBuilds = JSON.parse(data);
   jira = data;
 });
 
 var sonar = {};
-fs.readFile('./mocks/sonar.json', 'utf8', function (err, data) {
+fs.readFile('./app/mocks/sonar.json', 'utf8', function (err, data) {
   //jenkinsBuilds = JSON.parse(data);
   sonar = data;
 });

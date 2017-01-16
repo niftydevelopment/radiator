@@ -3,11 +3,11 @@ var fs = require('fs');
 
 
 var fetch = function() {
-  //console.log('Properties: fetch');
+  console.log('Properties: fetch');
 
   return new Promise(function(resolve, reject) {
 
-    fs.readFile('./properties/builds.json', 'utf8', function (err, data) {
+    fs.readFile('./app/properties/builds.json', 'utf8', function (err, data) {
       
       var urlSuffix = '/api/json?pretty=true';
       

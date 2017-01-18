@@ -58,7 +58,7 @@ var resultOfPoll = [];
 var runit = function() {
 
   setTimeout(function() {
-    //console.log('running');
+    //console.log('--------------------- running ---------------------');
 
     properties.fetch()
       .then(jenkins.poll)
@@ -95,5 +95,5 @@ var runit = function() {
     });
 
     runit();
-  }, 1000);
+  }, 10000);
 }

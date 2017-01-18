@@ -6,7 +6,7 @@ var historyFile = './history.json';
 
 var savedata = function(buildsFromJenkins) {
   
-  //console.log('SaveData: savedata');
+  //console.log('SaveData: savedata', buildsFromJenkins.length);
   
   return new Promise(function(resolve, reject) {
 

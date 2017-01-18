@@ -13,9 +13,21 @@ var loginArgs = {
   }
 };
 
+var session = null;
+
 var login = function() {
   //console.log('login');
   return new Promise(function(resolve, reject) {
+
+    if (session != null) { //testa om anv redan är inloggad.
+      var sa = constructSearchArgs(session);
+
+      getJiraInfo(build.jira, sa).then(function() {
+        resolve(sa);
+        return;
+      });
+
+    }
 
     var baseurl = 'https://etjanst.sjv.se/';
     if (process.env.MOCK) {
@@ -27,24 +39,14 @@ var login = function() {
     //console.log(loginUrl);
 
     client.post(loginUrl, loginArgs, function(data, response) {
-      
+
       if (response.statusCode == 200) {
 
-        var session = data.session;
+        session = data.session;
         // Get the session information and store it in a cookie in the header
-        var searchArgs = {
-            headers: {
-                // Set the cookie from the session information
-                cookie: session.name + '=' + session.value,
-                "Content-Type": "application/json"
-            },
-            data: {
-                // Provide additional data for the JIRA search. You can modify the JQL to search for whatever you want.
-                jql: "type=Bug AND status=Closed"
-            }
-        };
+        var searchArgs = constructSearchArgs(session);
 
-        //console.log('succesfully logged in, session:', data.session);
+        console.log('succesfully logged in, session:', data.session);
         resolve(searchArgs);
 
       } else {
@@ -57,9 +59,25 @@ var login = function() {
 
 }
 
+var constructSearchArgs = function(session) {
+
+  return {
+    headers: {
+      // Set the cookie from the session information
+      cookie: session.name + '=' + session.value,
+      "Content-Type": "application/json"
+    },
+    data: {
+      // Provide additional data for the JIRA search. You can modify the JQL to search for whatever you want.
+      jql: "type=Bug AND status=Closed"
+    }
+  };
+
+}
+
 var getJiraInfo = function(build, searchArgs) {
   //console.log('   Jira: getJiraInfo', build.jira);
-  
+
   return new Promise(function(resolve, reject) {
 
     var baseurl = 'https://etjanst.sjv.se/';
@@ -69,14 +87,14 @@ var getJiraInfo = function(build, searchArgs) {
 
     var url = baseurl + "jira/rest/api/2/issue/" + build.jira;
     //console.log('------------------->' , url);
-    client.get(url, searchArgs, 
+    client.get(url, searchArgs,
       function(searchResult, response) {
         build.jiraPlannedForVersion = null;
         if (searchResult.fields && searchResult.fields.fixVersions && searchResult.fields.fixVersions.length > 0) {
           build.jiraPlannedForVersion = searchResult.fields.fixVersions[0].name;
         }
         resolve(build);
-    });
+      });
 
   });
 
@@ -88,7 +106,7 @@ var decorate = function(builds) {
   return new Promise(function(resolve, reject) {
 
     login().then(function(searchArgs) {
-      
+
       var decoratedBuilds = [];
 
       builds.forEach(function(b) {
@@ -98,7 +116,7 @@ var decorate = function(builds) {
       Promise.all(decoratedBuilds).then(function(result) {
         resolve(builds);
       });
-            
+
 
     }, function(error) {
       //console.log(error);
@@ -113,7 +131,7 @@ var update = function(builds) {
   //console.log('Jira: update');
   //login
   //for each
-      //update
+  //update
 
   return new Promise(function(resolve, reject) {
     resolve(builds);

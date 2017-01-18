@@ -24,21 +24,18 @@ var poll = function(jobs) {
     Promise.all(jobDetails).then(function(result) {      
       
       result.forEach(function(detail) {
-        
+
         detail.builds.forEach(function(bbb) {
           builds.push(bbb);  
         });
 
       });
 
-      //console.log('>>>>>>>>>>>>', body);
-
       builds.forEach(function(b) {
-        buildDetails.push(getBuildDetails(b));
+        buildDetails.push(getDetailsForABuild(b));
       });
 
       Promise.all(buildDetails).then(function(res) {
-
         for (r in res) {
           if (res[r].changeSet.items.length > 0) {
             buildModels.push(buildModel(res[r]));
@@ -61,8 +58,6 @@ var poll = function(jobs) {
 
     return new Promise(function(resolve, reject) {
 
-      var details = [];
-
       request(jenkinsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
 
@@ -76,9 +71,7 @@ var poll = function(jobs) {
   }
 
 
-  var getBuildDetails = function(build) {
-    //console.log('   Jenkins: buildDetails:', build);
-
+  var getDetailsForABuild = function(build) {
     return new Promise(function(resolve, reject) {
 
       var buildDetailsUrl = build.url + urlSuffix;
@@ -87,13 +80,15 @@ var poll = function(jobs) {
         buildDetailsUrl = buildDetailsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');      
       }
 
-      //console.log('> buildDetails', buildDetailsUrl);
+      //console.log('   Jenkins: buildDetails:', buildDetailsUrl);
 
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          //console.log(body);
+          
           var result = JSON.parse(body);
           resolve(result);
+        } else {
+          console.log('EEEERRRROROOR');
         }
       });
 
@@ -103,7 +98,6 @@ var poll = function(jobs) {
 
 
   var buildModel = function(res) {
-    //console.log(res.result);
     var o =  {};
     o.id = res.id;
     o.user = res.changeSet.items[0].user;
@@ -112,7 +106,6 @@ var poll = function(jobs) {
     o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z
     o.result = res.result;
     o.fullDisplayName = res.fullDisplayName;
-    
     //console.log('-------------', o.fullDisplayName, o.user);
     return o;
   }

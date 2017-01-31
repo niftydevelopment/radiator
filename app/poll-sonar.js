@@ -42,6 +42,7 @@ var poll = function(builds) {
 
 var issues = function() {
   //http://vl-bygget-icc:9000/api/issues/search?componentRoots=se.sjv.kontroll.atlas:atlas-parent
+  //http://vl-bygget-icc:9000/api/issues/search?componentRoots=se.sjv.kontroll.atlas:atlas-parent&pageSize=-1
   var baseurl = 'http://vl-bygget-icc:9000/';
   if (process.env.MOCK) {
     baseurl = 'http://localhost:3000/'

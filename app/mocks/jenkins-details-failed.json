@@ -1,0 +1,89 @@
+{
+  "_class" : "hudson.maven.MavenModuleSetBuild",
+  "actions" : [
+    {
+      "_class" : "hudson.model.CauseAction",
+      "causes" : [
+        {
+          "_class" : "hudson.triggers.SCMTrigger$SCMTriggerCause",
+          "shortDescription" : "Started by an SCM change"
+        }
+      ]
+    },
+    {
+      
+    },
+    {
+      "_class" : "hudson.scm.SubversionTagAction"
+    },
+    {
+      
+    },
+    {
+      
+    },
+    {
+      
+    }
+  ],
+  "artifacts" : [
+    
+  ],
+  "building" : false,
+  "description" : null,
+  "displayName" : "#131",
+  "duration" : 171029,
+  "estimatedDuration" : 444452,
+  "executor" : null,
+  "fullDisplayName" : "atlas-snapshot-9.0 #131",
+  "id" : "131",
+  "keepLog" : false,
+  "number" : 131,
+  "queueId" : 3456,
+  "result" : "FAILURE",
+  "timestamp" : 1486051743434,
+  "url" : "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-9.0/131/",
+  "builtOn" : "",
+  "changeSet" : {
+    "_class" : "hudson.scm.SubversionChangeLogSet",
+    "items" : [
+      {
+        "_class" : "hudson.scm.SubversionChangeLogSet$LogEntry",
+        "affectedPaths" : [
+          "atlas-gui/atlasapp/app/app.js"
+        ],
+        "author" : {
+          "absoluteUrl" : "http://vl-bygget:8080/jenkins/user/dsin",
+          "fullName" : "Demas Sinner"
+        },
+        "commitId" : "124589",
+        "timestamp" : 1486051738686,
+        "date" : "2017-02-02T16:08:58.686497Z",
+        "msg" : "PCAP-17713 - Provocerar fram ett trasigt bygge då radiatorn inte reagerar korrekt vi failure.",
+        "paths" : [
+          {
+            "editType" : "edit",
+            "file" : "/system/kontroll/atlas/branches/9.0-Utveckling/atlas-gui/atlasapp/app/app.js"
+          }
+        ],
+        "revision" : 124589,
+        "user" : "Demas Sinner"
+      }
+    ],
+    "kind" : "svn",
+    "revisions" : [
+      {
+        "module" : "svn+ssh://cm-java@vl-delta/data/svn/repos/java/system/kontroll/atlas/branches/9.0-Utveckling",
+        "revision" : 124589
+      }
+    ]
+  },
+  "culprits" : [
+    {
+      "absoluteUrl" : "http://vl-bygget:8080/jenkins/user/dsin",
+      "fullName" : "Demas Sinner"
+    }
+  ],
+  "mavenArtifacts" : null,
+  "mavenVersionUsed" : "3.0.5"
+}

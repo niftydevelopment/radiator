@@ -1,6 +1,5 @@
 var request = require('request');
 var Promise = require('promise');
-var BuildModel = require('./model.js');
 var fs = require('fs');
 
 
@@ -80,8 +79,6 @@ var poll = function(jobs) {
         buildDetailsUrl = buildDetailsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');      
       }
 
-      //console.log('   Jenkins: buildDetails:', buildDetailsUrl);
-
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           
@@ -98,6 +95,7 @@ var poll = function(jobs) {
 
 
   var buildModel = function(res) {
+    //console.log('--->', res.result);
     var o =  {};
     o.id = res.id;
     o.user = res.changeSet.items[0].user;
@@ -106,7 +104,7 @@ var poll = function(jobs) {
     o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z
     o.result = res.result;
     o.fullDisplayName = res.fullDisplayName;
-    //console.log('-------------', o.fullDisplayName, o.user);
+    //console.log('-------------', o.result);
     return o;
   }
 

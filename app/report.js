@@ -5,6 +5,12 @@ var Promise = require('promise');
 
 var generate = function(builds) {
   //console.log('generate report', builds);
+  
+  /*
+  builds.forEach(function(b) {
+    console.log('b.result:', b.result);
+  });
+  */
 
   if (builds.length === 0) {//Det finns ingen förändring sedan sist. Skriv inte ut något.
     return;
@@ -28,6 +34,7 @@ var generate = function(builds) {
       if (i > 5) {
         return;
       }
+      //console.log(b.result);
       printBuilds(b, builds); 
     });
     

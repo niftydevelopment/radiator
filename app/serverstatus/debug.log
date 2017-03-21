@@ -1,0 +1,6 @@
+[0321/171204.070:ERROR:process_reader_win.cc(114)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs.  (0xc0000022)
+[0321/171204.072:ERROR:exception_snapshot_win.cc(87)] thread ID 6596 not found in process
+[0321/171204.070:ERROR:process_reader_win.cc(114)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs.  (0xc0000022)
+[0321/171204.072:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0321/171204.072:ERROR:exception_snapshot_win.cc(87)] thread ID 10040 not found in process
+[0321/171204.072:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed

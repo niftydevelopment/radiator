@@ -25,6 +25,7 @@ if(error !== null)
 var request = require('request');
 var http = require('http');
 var cheerio = require('cheerio');
+var Promise = require('promise');
 /*
 request({
     headers: {
@@ -37,11 +38,36 @@ request({
   });
 */
 
-
 var servers = [
-  {server: 'Jorden utv', serverurl: 'http://vl-jordenutv:8080/jorden/admin/admin', id: 'jorden-utv'},
-  {server: 'Atlas utv', serverurl: 'http://vl-atlastest01:8080/atlas/start', id: 'atlas-utv'}
+  { server: 'Jorden utv', serverurl: 'http://vl-jordenutv:8080/jorden/admin/admin', id: 'jorden-utv' },
+  { server: 'Atlas utv', serverurl: 'http://vl-atlastest01:8080/atlas/start', id: 'atlas-utv' }
 ];
+
+
+var nServers = servers.length;
+
+var resolved, rejected;
+
+var promise = new Promise(function(res, rej) {
+  resolved = res;
+  rejected = rej;
+});
+
+
+exports.fetchBuildStatus = function() {
+  servers.forEach((s) => {
+    getBuildInfo(s, parseBuildInfo);
+  });
+
+  return promise;
+}
+
+
+
+
+
+
+
 
 
 var getBuildInfo = function(server, callback) {
@@ -57,9 +83,12 @@ var getBuildInfo = function(server, callback) {
 
 var parseBuildInfo = function(err, res, body) {
 
+  nServers--;
+
   var $ = cheerio.load(body);
 
   var x = $('img');
+  
   var buildInfo = x[0].attribs.title;
   var b = buildInfo.split(',');
 
@@ -69,26 +98,17 @@ var parseBuildInfo = function(err, res, body) {
       info.push(ee);
     });
   });
-
+  
   servers.forEach((s) => {
-    if  (s.id === res.req._headers) {
+    //console.log(s.buildinfo);
+    //console.log(s.id + '--> ' + res.req._headers['server-id']);
+    if (s.id === res.req._headers['server-id']) {
       s.buildinfo = info;
     }
   });
 
+  if(nServers === 0) {
+    resolved(servers);
+  }
+
 }
-
-var Promise = require('promise');
- 
-var promise = new Promise(function (resolve, reject) {
-  get('http://www.google.com', function (err, res) {
-    if (err) reject(err);
-    else resolve(res);
-  });
-});
-
-servers.forEach((s) => {
-    getBuildInfo(s, parseBuildInfo);    
-});
-
-

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+        <title>Jorden</title>
+
+
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon shortcut" href="/jorden/sjv-web-internal/static/img/logo.png?10.0.0-SNAPSHOT2017-03-21 14:52" />
+
+
+
+        <link rel="stylesheet" href="/jorden/sjv-web-internal/static/vendor/tb3/css/bootstrap.min.css?10.0.0-SNAPSHOT2017-03-21 14:52" /><!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --><!--[if lt IE 9]><script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script><script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script><![endif]--><link type="text/css" rel="stylesheet" href="/jorden/javax.faces.resource/static/css/sjv.css.xhtml;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY?ln=sjv-web-internal" /><link type="text/css" rel="stylesheet" href="/jorden/javax.faces.resource/css/base.css.xhtml;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY?ln=jorden&amp;v=1_0" /></head><body>
+                <header id="sjv-header" class="container sjv-padding-top sjv-padding-bottom">
+                        <div class="bs-docs-grid">
+                                <div class="row show-grid">
+                                        <div class="col-xs-6">
+                                                <h1>Jorden <h6>10.0.0-SNAPSHOT, <a href="http://git.intern.jordbruksverket.se/jbr/jorden/tree/101f20d0">101f20d0</a>, UNKNOWN, 2017-03-21 14:52</h6>
+                                                </h1>
+                                        </div>
+                                        <div class="col-xs-6">
+                                                <img class="pull-right" title="Version: 10.0.0-SNAPSHOT, BuildTime: 2017-03-21 14:52" src="/jorden/sjv-web-internal/static/img/sjv-logo.png" />
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+
+
+                <div id="sjv-header-placeholder"></div>
+                        <nav class="navbar navbar-default" role="navigation">
+                                <div class="container">
+                                        <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                                        <span class="sr-only">Visa/dölj navigering</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                                                </button>
+                                        </div>
+
+        <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                                                <li class="active"><a href="/jorden/admin/admin;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">
+                                                                Administrera
+                                                        </a>
+                                                </li>
+                                                <li><a href="/jorden/test/index;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">
+                                                                Test
+                                                        </a>
+                                                </li>
+                </ul>
+        </div>
+
+                                </div>
+
+                        </nav>
+                        <div class="container"><span id="messages"></span>
+                        </div>
+
+        <div class="sjv-loading hide">
+                <div class="sjv-loading-text">
+                        <small>Vänta...</small>
+                </div>
+                <div class="sjv-spin sjv-spin-medium"></div>
+        </div><div id="maincontent" class="container">
+
+
+
+                <div class="row">
+                        <div class="col-md-12">
+<form id="adminform" name="adminform" method="post" action="/jorden/admin/admin;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="adminform" value="adminform" />
+
+                                                <fieldset>
+                                                        <legend>Administrera</legend>
+                                                        <div class="admin-box-wrapper">
+                                                                <div class="admin-box">
+                                                                        <h3>Admin</h3>
+                                                                        <ul>
+
+
+                                                                                <li><a href="../../jorden-gui">Jorden handläggargränssnitt</a></li>
+
+
+                                                                                <li><a href="/jorden/admin/user;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Användarinfo</a></li>
+
+
+                                                                                <li><a href="/jorden/admin/samiAnsokningar;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista SAMIAnsökningar</a></li>
+
+
+                                                                                <li><a href="/jorden/admin/regelloggar;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista regelloggar</a></li>
+
+                                                                                <li><a href="/jorden/admin/reloadLantbrukare;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Uppdatera  från lantbruksföretagsinfo</a></li>
+
+                                                                                <li><a href="/jorden/admin/arenden;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista ärenden för en lantbrukare</a></li>
+                                                                                                                <li><a href="/jorden/admin/datachange/datachangeLogs;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Datachange-loggar</a></li>
+
+
+
+
+
+                                                                                <li><a href="/jorden/admin/replayProjections;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Spela om projektioner</a></li>
+
+                                                                                <li><a href="/jorden/admin/replayBeslutaProjections;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Spela om besluta-projektioner</a></li>
+
+                                                                                <li><a href="/jorden/admin/handlingsinfo;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Handlingsinfo</a></li>
+
+                                                                                <li><a href="/jorden/admin/blis;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Blis</a></li>
+                                                                        </ul>
+                                                                </div>
+                                                                <div class="admin-box">
+                                                                        <h3>Händelser och event</h3>
+                                                                        <ul>
+                                                                                <li><a href="/jorden/admin/handelser;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista händelser</a></li>
+
+                                                                                <li><a href="../../jorden-gui/#/admin/visa-handelser">Lista händelser</a> <small>(ny och bättre)</small></li>
+
+                                                                                <li><a href="../../jorden-gui/#/admin/felhantering/failedevents">Felhändelser</a></li>
+
+                                                                                <li><a href="/jorden/admin/besluthandelser;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista besluthändelser</a></li>
+
+                                                                                <li><a href="/jorden/admin/beslutfelhandelser;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista beslutfelhändelser</a></li>
+
+                                                                                <li><a href="/jorden/admin/archivedEvents;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista archived events</a></li>
+
+                                                                                <li><a href="/jorden/admin/copyFailedEvents;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista/läs in failed events</a></li>
+
+                                                                                <li><a href="/jorden/admin/copyHandelser;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Hämta lantbrukares lagrade händelser</a></li>
+
+                                                                                <li><a href="/jorden/admin/copyBeslutHandelser;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista/läs in besluthändelser</a></li>
+
+                                                                                <li><a href="/jorden/admin/ongoingevents;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Lista ongoing Events</a></li>
+
+                                                                                <li><a href="/jorden/test/visaAnsokansarendeRegelresultat;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Visa regelresultat för ansökansärende då valideratHändelser bara innehåller förändringar</a></li>
+
+                                                                        </ul>
+                                                                </div>
+                                                                <div class="admin-box">
+                                                                        <h3>Djurhämtning</h3>
+                                                                        <ul>
+                                                                                <li><a href="/jorden/admin/hamtaDjuruppgifter;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Hämta djuruppgifter</a></li>
+                                                                                <li><a href="/jorden/admin/skickaMottagitDjur;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Skicka mottagit djuruppgifter</a></li>
+                                                                                <li><a href="/jorden/admin/djurkommunicering;jsessionid=xjzrKPULG0wtDG8OWrb8pxxY">Djurkommunicering</a></li>
+                                                                        </ul>
+                                                                </div>
+                                                        </div>
+                                                </fieldset><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="-1241128487315192519:-417253882865010844" autocomplete="off" />
+</form>
+                        </div>
+                </div></div>
+
+        <script src="/jorden/sjv-web-internal/static/js/sjv.config.js?10.0.0-SNAPSHOT2017-03-21 14:52"></script>
+        <script src="/jorden/sjv-web-internal/static/vendor/requirejs/require.min.js?10.0.0-SNAPSHOT2017-03-21 14:52"></script>
+        <script src="/jorden/sjv-web-internal/static/vendor/jquery/jquery.min.js?10.0.0-SNAPSHOT2017-03-21 14:52"></script>
+        <script src="/jorden/sjv-web-internal/static/vendor/tb3/js/bootstrap.min.js?10.0.0-SNAPSHOT2017-03-21 14:52"></script>
+        <script>
+                require({
+                        urlArgs: '10.0.0-SNAPSHOT2017-03-21 14:52',
+                        baseUrl: '/jorden'
+                }, ['sjv-web-internal/static/js/sjv.main']);
+
+
+                define('jquery171', function() {
+                        return window.jQuery;
+                });
+        </script>
+                <script data-module="sjv.full-template.scroll"></script>
+        <script>window.jQuery && jQuery.noConflict(true);</script>
+        <script data-module="sjv/sjv.toastr"></script><script type="text/javascript">
+                require(['sjv/ui/loadspinner'], function(LoadSpinner) {
+                        new LoadSpinner({
+                                delay: 1000
+                        });
+                });
+        </script></body>
+</html>

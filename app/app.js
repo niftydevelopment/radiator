@@ -1,7 +1,10 @@
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
 var serverStatus = require('./serverstatus/serverstatus.js');
+var buildStatus = require('./buildstatus/buildstatus.js');
+
 
 var socket_ = null
 
@@ -24,7 +27,8 @@ io.on('connection', function(socket) {
 
 var poll = () => {
   setTimeout(function() {
-    serverStatus.fetchBuildStatus().then(result => {
+
+    serverStatus.fetchServerStatus().then(result => {
 
       if (socket_) {
         console.log('socket.emit(serverstatus, result):', { hello: 'world' });
@@ -39,4 +43,28 @@ var poll = () => {
 }
 
 
-poll();
+var poll2 = () => {
+
+  setTimeout(function() {
+
+    buildStatus.fetchBuildStatus().then(result => {
+
+      /*
+      if (socket_) {
+        console.log('socket.emit(serverstatus, result):', { hello: 'world' });
+        socket_.emit('serverstatus', result)
+      } else {
+        console.log('socket is null');
+      }
+      */
+console.log(result);
+
+      poll2();
+    });
+
+  }, 10);
+
+}
+
+
+poll2();

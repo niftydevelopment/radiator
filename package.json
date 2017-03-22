@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "node ./app/index.js",
+    "start": "node ./app/app.js",
     "dev-server": "nodemon ./app/mockserver.js",
-    "dev-app": "nodemon ./app/index.js mock",
+    "dev-app": "nodemon ./app/app.js mock",
     "dev": "concurrently --kill-others \"nodemon ./app/mockserver.js\" \"nodemon ./app/index.js mock\""
   },
   "repository": {

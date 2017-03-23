@@ -3,21 +3,19 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io.connect('http://localhost:9000');
+  var socket = io.connect(window.location.href);
   socket.on('serverstatus', function (data) {
-  	console.log('mamma');
-    console.log(data);
+    //console.log(data);
 
     document.getElementById("serverstatus").innerHTML = '';
     data.forEach(function(s) {
     	document.getElementById("serverstatus").innerHTML += '<b>' + s.server + '</b><br>';
-    	console.log('--->', s.buildinfo != undefined);
+
     	if (s.buildinfo != undefined) {
 	    	document.getElementById("serverstatus").innerHTML += s.buildinfo[0] + ':';
 	    	document.getElementById("serverstatus").innerHTML += s.buildinfo[1] + '<br>';
 	    	document.getElementById("serverstatus").innerHTML += s.buildinfo[2] + ':';
 	    	document.getElementById("serverstatus").innerHTML += s.buildinfo[3] + '<br>';
-
     	} else {
 			document.getElementById("serverstatus").innerHTML += "Servern ligger nere.";
     	}

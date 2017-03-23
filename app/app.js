@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
-  
+
   console.log('onConnection');
 
   socket_ = socket;
@@ -25,20 +25,33 @@ io.on('connection', function(socket) {
 
 });
 
+var startup = true;
 var poll = () => {
-  setTimeout(function() {
 
-    serverStatus.fetchServerStatus().then(result => {
-
+  if (startup) {
+    serverStatus.fetch().then(result => {
       if (socket_) {
         console.log('socket.emit(serverstatus, result):', { hello: 'world' });
-      	socket_.emit('serverstatus', result)
+        socket_.emit('serverstatus', result)
       } else {
         console.log('socket is null');
       }
       poll();
     });
-  }, 5000);
+    startup = false;
+  }
+  
+  setTimeout(function() {
+    serverStatus.fetch().then(result => {
+      if (socket_) {
+        console.log('socket.emit(serverstatus, result):', { hello: 'world' });
+        socket_.emit('serverstatus', result)
+      } else {
+        console.log('socket is null');
+      }
+      poll();
+    });
+  }, 10000);
 
 }
 
@@ -57,7 +70,7 @@ var poll2 = () => {
         console.log('socket is null');
       }
       */
-console.log(result);
+      console.log(result);
 
       poll2();
     });
@@ -67,4 +80,4 @@ console.log(result);
 }
 
 
-poll2();
+poll();

@@ -27,7 +27,7 @@ var promise = new Promise(function(res, rej) {
 });
 
 
-exports.fetchBuildStatus = function() {
+exports.fetch = function() {
   servers.forEach((s) => {
     getBuildInfo(s, parseBuildInfo);
   });

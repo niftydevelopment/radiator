@@ -31,7 +31,9 @@ var poll = () => {
   if (startup) {
     serverStatus.fetch().then(result => {
       if (socket_) {
-        console.log('socket.emit(serverstatus, result):', { hello: 'world' });
+
+        console.log('socket.emit(serverstatus, result):', getFormattedDate());
+
         socket_.emit('serverstatus', result)
       } else {
         console.log('socket is null');
@@ -44,7 +46,9 @@ var poll = () => {
   setTimeout(function() {
     serverStatus.fetch().then(result => {
       if (socket_) {
-        console.log('socket.emit(serverstatus, result):', { hello: 'world' });
+        
+        console.log('socket.emit(serverstatus, result):', getFormattedDate());
+        
         socket_.emit('serverstatus', result)
       } else {
         console.log('socket is null');
@@ -53,6 +57,14 @@ var poll = () => {
     });
   }, 10000);
 
+}
+
+
+function getFormattedDate() {
+    var date = new Date();
+    var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+    return str;
 }
 
 

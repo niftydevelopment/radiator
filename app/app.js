@@ -8,6 +8,12 @@ var buildStatus = require('./buildstatus/buildstatus.js');
 
 var socket_ = null
 
+var startup = true;
+var savedResult = null;
+
+var buildStartup = true;
+var savedBuildResult = null;
+
 server.listen(9000);
 
 app.get('/', function(req, res) {
@@ -15,41 +21,42 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
-
   console.log('onConnection');
-
   socket_ = socket;
-  socket.on('my other event', function(data) {
-    console.log(data);
-  });
-
+  if (savedResult) {
+    socket_.emit('serverstatus', savedResult);
+  }
 });
 
-var startup = true;
+
 var poll = () => {
 
   if (startup) {
+    console.log('startup:', getFormattedDate());
     serverStatus.fetch().then(result => {
       if (socket_) {
 
         console.log('socket.emit(serverstatus, result):', getFormattedDate());
 
-        socket_.emit('serverstatus', result)
+        socket_.emit('serverstatus', result);
+        savedResult = result;
       } else {
         console.log('socket is null');
       }
       poll();
     });
     startup = false;
+    return;
   }
-  
+
   setTimeout(function() {
     serverStatus.fetch().then(result => {
       if (socket_) {
-        
+
         console.log('socket.emit(serverstatus, result):', getFormattedDate());
-        
-        socket_.emit('serverstatus', result)
+
+        socket_.emit('serverstatus', result);
+        savedResult = result;
       } else {
         console.log('socket is null');
       }
@@ -61,35 +68,58 @@ var poll = () => {
 
 
 function getFormattedDate() {
-    var date = new Date();
-    var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  var date = new Date();
+  var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
-    return str;
+  return str;
 }
 
 
-var poll2 = () => {
+var pollBuild = () => {
 
-  setTimeout(function() {
+  if (buildStartup) {
+
+    console.log('startup pollBuild:', getFormattedDate());
 
     buildStatus.fetchBuildStatus().then(result => {
+      console.log('buildstatus:', result);
 
-      /*
       if (socket_) {
-        console.log('socket.emit(serverstatus, result):', { hello: 'world' });
-        socket_.emit('serverstatus', result)
+
+        console.log('socket.emit(buildstatus, result):', getFormattedDate());
+
+        socket_.emit('buildstatus', result);
+        savedBuildResult = result;
       } else {
         console.log('socket is null');
       }
-      */
-      console.log(result);
-
-      poll2();
+      poll();
     });
+    buildStartup = false;
+    return;
+  }
 
-  }, 10);
+  setTimeout(function() {
+    buildStatus.fetchBuildStatus().then(result => {
+      if (socket_) {
+
+        console.log('socket.emit(buildstatus, result):', getFormattedDate());
+
+        socket_.emit('buildstatus', result);
+        savedBuildResult = result;
+      } else {
+        console.log('socket is null');
+      }
+      poll();
+    });
+  }, 100000);
+
+
+
 
 }
 
 
+
 poll();
+pollBuild();

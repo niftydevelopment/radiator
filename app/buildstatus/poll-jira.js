@@ -31,7 +31,7 @@ var login = function() {
 
     var baseurl = 'https://etjanst.sjv.se/';
     if (process.env.MOCK) {
-      baseurl = 'http://localhost:3000/'
+      //baseurl = 'http://localhost:3000/'
     }
 
     var loginUrl = baseurl + 'jira/rest/auth/1/session';
@@ -82,7 +82,7 @@ var getJiraInfo = function(build, searchArgs) {
 
     var baseurl = 'https://etjanst.sjv.se/';
     if (process.env.MOCK) {
-      baseurl = 'http://localhost:3000/'
+      //baseurl = 'http://localhost:3000/'
     }
 
     var url = baseurl + "jira/rest/api/2/issue/" + build.jira;

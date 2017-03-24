@@ -1,6 +1,4 @@
 [
-	{"jenkins":"atlas-snapshot-trunk","jira":"Atlas 8.0"},
-	{"jenkins":"atlas-snapshot-9.0","jira":"Atlas 9.0"},
-	{"jenkins":"atlas-snapshot-9.0-UtvKontrollinfo", "jira":"Atlas 9.0"}
+	{"jenkins":"atlas-snapshot-GIT-release-10.0","jira":"Atlas 10.0"}
 ]
 

@@ -12,9 +12,9 @@ var fetch = function() {
       var urlSuffix = '/api/json?pretty=true';
       
       var baseurl = 'https://utv.sjv.se/';
-      if (process.env.MOCK) {
-        baseurl = 'http://localhost:3000/'
-      }
+      //if (process.env.MOCK) {
+      //  baseurl = 'http://localhost:3000/'
+      //}
 
       baseurl += 'jenkins/view/kontroll/job/';
       

@@ -7,6 +7,7 @@ var socket = io.connect(window.location.href, {
   'reconnectionDelay': 500,
   'reconnectionAttempts': 10
 });
+
 socket.on('serverstatus', function(data) {
 
   document.getElementById("serverstatus").innerHTML = '';
@@ -23,5 +24,9 @@ socket.on('serverstatus', function(data) {
     }
     document.getElementById("serverstatus").innerHTML += '<hr>';
   });
+});
+
+socket.on('buildstatus', function(data) {
+	console.log('buildstatus', data);
 });
 </script>

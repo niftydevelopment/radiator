@@ -1,7 +1,7 @@
 var Promise = require('promise');
 
 var decorate = function(builds) {
-  //console.log('Parser: decorate', builds.length);
+  console.log('Parser: decorate', builds.length);
   
   function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);

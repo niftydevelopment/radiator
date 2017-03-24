@@ -7,7 +7,7 @@ var branch = 'atlas-snapshot-trunk';
 var urlSuffix = '/api/json?pretty=true';
 
 var poll = function(jobs) {
-  //console.log('Jenkins: poll', jobs.length);
+  console.log('Jenkins: poll', jobs.length);
 
   return new Promise(function(resolve, reject) {
 
@@ -17,6 +17,7 @@ var poll = function(jobs) {
     var buildModels = [];
 
     jobs.forEach(function(j) {
+        console.log('Jenkins: poll', j.jUrl);
       jobDetails.push(getBuilds(j.jUrl));
     });
 
@@ -53,7 +54,7 @@ var poll = function(jobs) {
 }
 
   var getBuilds = function(jenkinsUrl) {
-    //console.log('   Jenkins: getBuilds', jenkinsUrl);
+    console.log('   Jenkins: getBuilds', jenkinsUrl);
 
     return new Promise(function(resolve, reject) {
 
@@ -76,7 +77,7 @@ var poll = function(jobs) {
       var buildDetailsUrl = build.url + urlSuffix;
 
       if (process.env.MOCK) {
-        buildDetailsUrl = buildDetailsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');      
+        //buildDetailsUrl = buildDetailsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');      
       }
 
       request(buildDetailsUrl, function (error, response, body) {

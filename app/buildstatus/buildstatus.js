@@ -31,6 +31,7 @@ var resultOfPoll = [];
 
 
 var fetchBuildStatus = function() {
+  console.log('fetchBuildStatus A');
 
   var resolve, reject;
   var result = new Promise(function(res, rej) {
@@ -39,9 +40,7 @@ var fetchBuildStatus = function() {
   });
 
   init().then(() => {
-
-    setTimeout(function() {
-
+console.log('fetchBuildStatus B');
       properties.fetch()
         .then(jenkins.poll)
         .then(parser.decorate)
@@ -49,7 +48,7 @@ var fetchBuildStatus = function() {
         .then(jira.decorate)
 
       .then(function(result) {
-
+console.log('fetchBuildStatus Z');
         //console.log('>>>>>>', result.length);
         resultOfPoll = result;
 
@@ -82,9 +81,8 @@ var fetchBuildStatus = function() {
 
       });
 
-      fetchBuildStatus();
 
-    }, 10000);
+
 
   });
 

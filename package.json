@@ -7,7 +7,7 @@
     "test": "mocha",
     "start": "node ./app/app.js",
     "dev-server": "nodemon ./app/mockserver.js",
-    "dev-app": "nodemon ./app/app.js mock",
+    "dev-app": "nodemon ./app/app.js",
     "dev": "concurrently --kill-others \"nodemon ./app/mockserver.js\" \"nodemon ./app/index.js mock\""
   },
   "repository": {

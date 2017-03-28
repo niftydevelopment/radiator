@@ -1,7 +1,25 @@
 var Client = require('node-rest-client').Client;
+var fs = require('fs');
 
 client = new Client();
 var Promise = require('promise');
+
+
+var fetchJiraUser = function() {
+  console.log('Properties: fetch');
+
+  return new Promise(function(resolve, reject) {
+
+    fs.readFile('./app/properties/passwords.json', 'utf8', function (err, data) {
+      var user = JSON.parse(data);
+      resolve(user);
+    });
+
+  });
+
+}
+
+
 
 var loginArgs = {
   data: {
@@ -15,8 +33,10 @@ var loginArgs = {
 
 var session = null;
 
-var login = function() {
-  //console.log('login');
+var login = function(user) {
+  console.log('login', user);
+  loginArgs.data = user;
+
   return new Promise(function(resolve, reject) {
 
     if (session != null) { //testa om anv redan är inloggad.
@@ -105,7 +125,7 @@ var decorate = function(builds) {
 
   return new Promise(function(resolve, reject) {
 
-    login().then(function(searchArgs) {
+    fetchJiraUser().then(login).then(function(searchArgs) {
 
       var decoratedBuilds = [];
 

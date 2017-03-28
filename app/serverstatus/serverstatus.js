@@ -1,6 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var Promise = require('promise');
+var fs = require('fs');
 
 var nServers, servers;
 
@@ -13,20 +14,27 @@ var promise = new Promise(function(res, rej) {
 
 
 var getServers = function() {
-  fs.readFile('./app/properties/servers.json', 'utf8', function(err, data) {
-    resolve(builds);
+  console.log('getServers()');
+
+  return new Promise(function(res, rej) {
+    fs.readFile('./app/properties/servers.json', 'utf8', function(err, data) {
+      res(data);
+    });
   });
+
 }
 
 exports.fetch = function() {
+  console.log('fetch()');
 
   getServers().then((serverList) => {
-    servers = serverList;
+    servers = JSON.parse(serverList);
     nServers = servers.length;
 
     servers.forEach((s) => {
       getBuildInfo(s, parseBuildInfo);
     });
+
   });
 
   return promise;
@@ -34,6 +42,7 @@ exports.fetch = function() {
 
 
 var getBuildInfo = function(server, callback) {
+  console.log('getBuildInfo()');
 
   var headers = {
     'X-USERID': 'MSTEN',
@@ -64,7 +73,7 @@ var parseBuildInfo = function(err, res, body) {
     var x = $('img');
 
     //Servern är upp men inget vettigt svar.
-    if (!x || Object.keys(x).length === 0) {
+    if (!x || Object.keys(x).length === 0 || !x[0]) {
       return;
     }
 

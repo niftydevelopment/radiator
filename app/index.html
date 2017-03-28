@@ -1,16 +1,28 @@
+<!-- button onClick="forsera()">Forsera uppdatering</button -->
 <div id="serverstatus">
 </div>
+
+<div id="buildstatus">
+</div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
+
 var socket = io.connect(window.location.href, {
   'reconnection': true,
   'reconnectionDelay': 500,
   'reconnectionAttempts': 10
 });
 
-socket.on('serverstatus', function(data) {
+var forsera = function() {
+  console.log('forsera');
+  socket.emit('forserauppdatering');
+}
 
+socket.on('serverstatus', function(data) {
+  console.log('serverstatus', data);
   document.getElementById("serverstatus").innerHTML = '';
+  
   data.forEach(function(s) {
     document.getElementById("serverstatus").innerHTML += '<b>' + s.server + '</b><br>';
 
@@ -24,9 +36,59 @@ socket.on('serverstatus', function(data) {
     }
     document.getElementById("serverstatus").innerHTML += '<hr>';
   });
+
 });
+
+/*
+coverage
+:
+68.4
+date
+:
+"2017-01-31T14:46:20.155015Z"
+formattedCoverage
+:
+"68.4%"
+formattedDate
+:
+"20170131144620155015"
+fullDisplayName
+:
+"atlas-snapshot-trunk #5629"
+id
+:
+"5629"
+jira
+:
+"PCAP-18112"
+jiraPlannedForVersion
+:
+"Atlas 8.0"
+msg
+:
+"PCAP-18112 - Jämför resultatvyn ser knepig ut (Underliggande kontrollpunkter och endast första kontrollanten har svarat)"
+result
+:
+"SUCCESS"
+user
+:
+"Linnea Karlsson"
+*/
 
 socket.on('buildstatus', function(data) {
 	console.log('buildstatus', data);
+  
+  document.getElementById("buildstatus").innerHTML = '';
+  
+  data.forEach(function(b) {
+    if (b != undefined) {
+      document.getElementById("buildstatus").innerHTML += b.fullDisplayName + '<br>';
+      document.getElementById("buildstatus").innerHTML += b.msg + 'User: ';
+      document.getElementById("buildstatus").innerHTML += b.user + 'Date: ';
+      document.getElementById("buildstatus").innerHTML += b.date + 'Planerad för Jira';
+      document.getElementById("buildstatus").innerHTML += b.jiraPlannedForVersion + '<br>';
+    } 
+    document.getElementById("buildstatus").innerHTML += '<hr>';
+  });
 });
 </script>

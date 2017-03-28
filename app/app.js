@@ -73,11 +73,19 @@ io.on('connection', function(socket) {
   }
 });
 
+io.on('forserauppdatering', () => {
+  console.log('forserauppdatering');
+  startup = true;
+  poll();
+})
+
 
 var poll = () => {
+  console.log('poll()');
 
   if (startup) {
-    console.log('startup:', getFormattedDate());
+    console.log('poll() / startup', getFormattedDate());
+
     serverStatus.fetch().then(result => {
       if (socket_) {
 
@@ -107,7 +115,7 @@ var poll = () => {
       }
       poll();
     });
-  }, 1000);
+  }, 60000);
 
 }
 
@@ -121,13 +129,13 @@ function getFormattedDate() {
 
 
 var pollBuild = () => {
-
+    console.log('startup pollBuild:', getFormattedDate());
   if (buildStartup) {
 
     console.log('startup pollBuild:', getFormattedDate());
 
     buildStatus.fetchBuildStatus().then(result => {
-      console.log('buildstatus:', result);
+      //console.log('buildstatus:', result);
 
       if (socket_) {
 
@@ -157,7 +165,7 @@ var pollBuild = () => {
       }
       poll();
     });
-  }, 1000);
+  }, 10000);
 
 
 
@@ -166,7 +174,6 @@ var pollBuild = () => {
 
 
 init().then(() => {
-  console.log('-->');
   poll();
   pollBuild();
 });

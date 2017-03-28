@@ -2,9 +2,15 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+var colors        = require('colors');
+var program       = require('commander');
+var Promise       = require('promise');
+
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 var serverStatus = require('./serverstatus/serverstatus.js');
 var buildStatus = require('./buildstatus/buildstatus.js');
-
 
 var socket_ = null
 
@@ -13,6 +19,45 @@ var savedResult = null;
 
 var buildStartup = true;
 var savedBuildResult = null;
+
+
+
+var init = function() {
+
+  return new Promise(function(resolve, reject) {
+
+  program
+    .version('0.0.4')
+    .description('AC 4 president!')
+    .option('-n, --numberofbuilds <n>', 'Antal builds som skall visas')
+    .option('-m, --mock', 'Kör mot mockat läge')
+    .parse(process.argv);
+
+  var OPTS = {n:8,m:false};
+
+  if (program.numberofbuilds) {
+    OPTS.n = program.numberofbuilds;
+  }
+
+  if (program.mock) {
+    OPTS.m = true;
+    process.env['MOCK'] = OPTS;
+  }
+  
+  console.log('Radiator startad:');
+  if (program.mock) {
+    console.log('  - i mockat läge');
+  }
+
+  console.log('  - %j antal builds visas', program.numberofbuilds);
+
+  resolve();
+
+  });
+
+}
+
+
 
 server.listen(9000);
 
@@ -62,7 +107,7 @@ var poll = () => {
       }
       poll();
     });
-  }, 100000);
+  }, 1000);
 
 }
 
@@ -112,7 +157,7 @@ var pollBuild = () => {
       }
       poll();
     });
-  }, 100000);
+  }, 1000);
 
 
 
@@ -120,6 +165,10 @@ var pollBuild = () => {
 }
 
 
+init().then(() => {
+  console.log('-->');
+  poll();
+  pollBuild();
+});
 
-poll();
-pollBuild();
+init(); 

@@ -1,0 +1,14 @@
+[
+  { "server": "Jorden utv", "serverurl": "http://vl-jordenutv:8080/jorden/admin/admin", "id": "jorden-utv" },
+  { "server": "Jorden Atlas Docker", "serverurl": "http://vl-atomictest02:8101/jorden/admin/admin", "id": "jorden-a-docker" },
+  { "server": "Jorden Volym", "serverurl": "http://vl-jordenvol01:8080/jorden/admin/admin", "id": "jorden-volym" },
+  { "server": "Jorden test 1", "serverurl": "http://vl-jordentest:8080/jorden/admin/admin", "id": "jorden-test-1" },
+  { "server": "Jorden test 2", "serverurl": "http://vl-jordentest2-01:8080/jorden/admin/admin", "id": "jorden-test-2" },
+
+  { "server": "Atlas test 1", "serverurl": "http://vl-atlastest01:8080/atlas/start", "id": "atlas-test1" },
+  { "server": "Atlas utv 1", "serverurl": "http://vl-kontrollutv:8080/atlas/start", "id": "atlas-utv" },
+  { "server": "Atlas test 2", "serverurl": "http://vl-atlastest2-01:8080/atlas/start", "id": "atlas-test2" },
+  { "server": "Atlas prestanda", "serverurl": "http://vl-atlasp01:8080/atlas/start", "id": "atlas-prestanda" },
+  { "server": "Atlas docker", "serverurl": "http://vl-atomictest02:8102/atlas/start", "id": "atlas-docker" },
+  { "server": "Atlas volym", "serverurl": "http://vl-atlasvol01:8080/atlas/start", "id": "atlas-volym" }
+]

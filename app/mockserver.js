@@ -3,6 +3,15 @@ var fs = require('fs');
 
 var app = express();
 
+var html = {};
+var readServerstatusHTML = function() {
+  fs.readFile('./app/mocks/serverstatus.html', 'utf8', function (err, data) {
+    //jenkinsBuilds = JSON.parse(data);
+    html = data;
+  });  
+}
+readServerstatusHTML();
+
 var jenkinsBuilds = {};
 fs.readFile('./app/mocks/jenkins.json', 'utf8', function (err, data) {
   //jenkinsBuilds = JSON.parse(data);
@@ -33,15 +42,12 @@ app.get('/', function (req, res) {
   res.send('Hello world')
 });
 
-// https://utv.sjv.se
-//                    /jenkins/view/kontroll/job/atlas-snapshot-trunk/api/json?pretty=truerunning
-//https://utv.sjv.se
-//                        /jenkins/view/kontroll/job/atlas-snapshot-trunk/5436/
+app.get('/serverstatus', function (req, res) {
+  console.log('Ber om serverns bygg info');
+  readServerstatusHTML();
+  res.send(html);
+});
 
-
-
-// http://vl-bygget-icc:9000
-//                        /api/resources?metrics=ncloc,coverage&format=json
 app.get('/api/resources', function (req, res) {
   res.send(sonar);
 });

@@ -14,7 +14,7 @@ var promise = new Promise(function(res, rej) {
 
 
 var getServers = function() {
-  console.log('getServers()');
+  //console.log('getServers()');
 
   return new Promise(function(res, rej) {
     fs.readFile('./app/properties/servers.json', 'utf8', function(err, data) {
@@ -25,7 +25,7 @@ var getServers = function() {
 }
 
 exports.fetch = function() {
-  console.log('fetch()');
+  //console.log('fetch()');
 
   getServers().then((serverList) => {
     servers = JSON.parse(serverList);
@@ -42,7 +42,7 @@ exports.fetch = function() {
 
 
 var getBuildInfo = function(server, callback) {
-  console.log('getBuildInfo()');
+  //console.log('getBuildInfo()');
 
   var headers = {
     'X-USERID': 'MSTEN',
@@ -53,6 +53,9 @@ var getBuildInfo = function(server, callback) {
     headers.Cookie = server.cookie;
   }
 
+  if (process.env.MOCK) {
+    server.serverurl = 'http://localhost:3000/serverstatus'
+  }
 
   request({ headers, uri: server.serverurl, method: 'GET' }, callback);
 }
@@ -77,10 +80,15 @@ var parseBuildInfo = function(err, res, body) {
       return;
     }
 
-    var currentServer;
+
+
+    var currentServerIndex = 0;
     servers.forEach((s) => {
       if (s.id === res.req._headers['server-id']) {
-        currentServer = s;
+        currentServerIndex++;
+      } else {
+        currentServerIndex++;
+        return;
       }
     });
 
@@ -96,10 +104,10 @@ var parseBuildInfo = function(err, res, body) {
       });
     });
 
+    console.log(info[1]);
+
     currentServer.buildinfo = info;
     currentServer.cookie = res.headers['set-cookie'];
-    //console.log(currentServer);
-
   }
 
   if (nServers === 0) {

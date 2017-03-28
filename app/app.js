@@ -2,9 +2,9 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var colors        = require('colors');
-var program       = require('commander');
-var Promise       = require('promise');
+var colors = require('colors');
+var program = require('commander');
+var Promise = require('promise');
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -26,32 +26,32 @@ var init = function() {
 
   return new Promise(function(resolve, reject) {
 
-  program
-    .version('0.0.4')
-    .description('AC 4 president!')
-    .option('-n, --numberofbuilds <n>', 'Antal builds som skall visas')
-    .option('-m, --mock', 'Kör mot mockat läge')
-    .parse(process.argv);
+    program
+      .version('0.0.4')
+      .description('AC 4 president!')
+      .option('-n, --numberofbuilds <n>', 'Antal builds som skall visas')
+      .option('-m, --mock', 'Kör mot mockat läge')
+      .parse(process.argv);
 
-  var OPTS = {n:8,m:false};
+    var OPTS = { n: 8, m: false };
 
-  if (program.numberofbuilds) {
-    OPTS.n = program.numberofbuilds;
-  }
+    if (program.numberofbuilds) {
+      OPTS.n = program.numberofbuilds;
+    }
 
-  if (program.mock) {
-    OPTS.m = true;
-    process.env['MOCK'] = OPTS;
-  }
-  
-  console.log('Radiator startad:');
-  if (program.mock) {
-    console.log('  - i mockat läge');
-  }
+    if (program.mock) {
+      OPTS.m = true;
+      process.env['MOCK'] = OPTS;
+    }
 
-  console.log('  - %j antal builds visas', program.numberofbuilds);
+    console.log('Radiator startad:');
+    if (process.env.MOCK) {
+      console.log('  - i mockat läge :-)');
+    }
 
-  resolve();
+    console.log('  - %j antal builds visas', program.numberofbuilds);
+
+    resolve();
 
   });
 
@@ -81,14 +81,13 @@ io.on('forserauppdatering', () => {
 
 
 var poll = () => {
-  console.log('poll()');
+  //console.log('poll()');
 
   if (startup) {
     console.log('poll() / startup', getFormattedDate());
 
     serverStatus.fetch().then(result => {
       if (socket_) {
-
         console.log('socket.emit(serverstatus, result):', getFormattedDate());
 
         socket_.emit('serverstatus', result);
@@ -105,17 +104,16 @@ var poll = () => {
   setTimeout(function() {
     serverStatus.fetch().then(result => {
       if (socket_) {
-
         console.log('socket.emit(serverstatus, result):', getFormattedDate());
-
-        socket_.emit('serverstatus', result);
+console.log('------', result);
         savedResult = result;
+        socket_.emit('serverstatus', result);
       } else {
         console.log('socket is null');
       }
       poll();
     });
-  }, 60000);
+  }, 600);
 
 }
 
@@ -129,7 +127,7 @@ function getFormattedDate() {
 
 
 var pollBuild = () => {
-    console.log('startup pollBuild:', getFormattedDate());
+  console.log('startup pollBuild:', getFormattedDate());
   if (buildStartup) {
 
     console.log('startup pollBuild:', getFormattedDate());
@@ -167,15 +165,12 @@ var pollBuild = () => {
     });
   }, 10000);
 
-
-
-
 }
 
 
 init().then(() => {
   poll();
-  pollBuild();
+  //pollBuild();
 });
 
-init(); 
+init();

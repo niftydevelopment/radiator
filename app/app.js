@@ -84,11 +84,13 @@ var poll = () => {
   //console.log('poll()');
 
   if (startup) {
-    console.log('poll() / startup', getFormattedDate());
+    //console.log('poll() / startup', getFormattedDate());
 
     serverStatus.fetch().then(result => {
+      //console.log('-----> serverStatus.fetch() result:', result);
+
       if (socket_) {
-        console.log('socket.emit(serverstatus, result):', getFormattedDate());
+
 
         socket_.emit('serverstatus', result);
         savedResult = result;
@@ -102,17 +104,21 @@ var poll = () => {
   }
 
   setTimeout(function() {
-    serverStatus.fetch().then(result => {
+    
+    serverStatus.fetch().then(r => {
+      
       if (socket_) {
-        console.log('socket.emit(serverstatus, result):', getFormattedDate());
-console.log('------', result);
-        savedResult = result;
-        socket_.emit('serverstatus', result);
+        savedResult = r;
+        //console.log('socket.emit(serverstatus, result):', getFormattedDate());
+        socket_.emit('serverstatus', r);
       } else {
         console.log('socket is null');
       }
+
       poll();
+
     });
+
   }, 600);
 
 }

@@ -7,11 +7,6 @@ var nServers, servers;
 
 var resolved, rejected;
 
-var promise = new Promise(function(res, rej) {
-  resolved = res;
-  rejected = rej;
-});
-
 
 var getServers = function() {
   //console.log('getServers()');
@@ -25,19 +20,23 @@ var getServers = function() {
 }
 
 exports.fetch = function() {
-  //console.log('fetch()');
 
-  getServers().then((serverList) => {
-    servers = JSON.parse(serverList);
-    nServers = servers.length;
+  return new Promise(function(res, rej) {
 
-    servers.forEach((s) => {
-      getBuildInfo(s, parseBuildInfo);
+    resolved = res;
+
+    getServers().then((serverList) => {
+      servers = JSON.parse(serverList);
+      nServers = servers.length;
+
+      servers.forEach((s) => {
+        getBuildInfo(s, parseBuildInfo);
+      });
+
     });
 
   });
 
-  return promise;
 }
 
 
@@ -82,14 +81,13 @@ var parseBuildInfo = function(err, res, body) {
 
 
 
+    var i = 0;
     var currentServerIndex = 0;
     servers.forEach((s) => {
       if (s.id === res.req._headers['server-id']) {
-        currentServerIndex++;
-      } else {
-        currentServerIndex++;
-        return;
+        currentServerIndex = i;
       }
+      i++;
     });
 
 
@@ -104,13 +102,12 @@ var parseBuildInfo = function(err, res, body) {
       });
     });
 
-    console.log(info[1]);
-
-    currentServer.buildinfo = info;
-    currentServer.cookie = res.headers['set-cookie'];
+    servers[currentServerIndex].buildinfo = info;
+    servers[currentServerIndex].cookie = res.headers['set-cookie'];
   }
 
   if (nServers === 0) {
+    //console.log('Parsed info:', servers[0].buildinfo[1]);
     resolved(servers);
   }
 

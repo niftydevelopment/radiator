@@ -24,7 +24,8 @@ socket.on('serverstatus', function(data) {
   document.getElementById("serverstatus").innerHTML = '';
   
   data.forEach(function(s) {
-    document.getElementById("serverstatus").innerHTML += '<b>' + s.server + '</b><br>';
+    
+    document.getElementById("serverstatus").innerHTML += '<b><a href="' + s.serverurl + '" target="_blank">' + s.server + '</a></b><br>';
 
     if (s.buildinfo != undefined) {
       document.getElementById("serverstatus").innerHTML += s.buildinfo[0] + ':';

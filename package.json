@@ -4,10 +4,10 @@
   "description": "Den som trachar flest builds får bjuda på öl!",
   "main": "index.js",
   "scripts": {
+    "integrate": "nodemon ./app/integrate/index",
     "test": "mocha",
     "start": "node ./app/app.js",
     "dev-server": "nodemon ./app/mockserver.js",
-
     "dev-app": "nodemon ./app/app.js",
     "dev-app-mocked": "nodemon ./app/app.js mock",
     "dev": "concurrently --kill-others \"nodemon ./app/mockserver.js\" \"nodemon ./app/index.js mock\""
@@ -31,6 +31,7 @@
     "commander": "^2.9.0",
     "figlet": "^1.2.0",
     "lodash": "^4.17.2",
+    "nodemailer": "^4.0.1",
     "promise": "^7.1.1",
     "request": "^2.79.0",
     "socket.io": "^1.7.3"

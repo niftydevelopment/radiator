@@ -4,13 +4,9 @@ const properties = require('./../properties');
 var Promise = require('promise');
 
 var createTransporter = function() {
-
   return new Promise(function(resolve, reject) {
 
     var mailproperties = properties.fetch('mail').then(mailproperties => {
-
-      console.log('mailproperties.user', mailproperties.username);
-      console.log('mailproperties.password', mailproperties.password);
 
       var transport = nodemailer.createTransport({
         service: 'gmail',
@@ -30,21 +26,21 @@ var createTransporter = function() {
 }
 
 var createMail = function(subject, body) {
-  return mailOptions = {
+  var x = {
     from: 'foobarbyradiator@gmail.com',
     to: 'demassinner@gmail.com ',
     subject: subject,
     text: body,
     html: '<b>' + body + '</b>'
   };
+
+  return x;
 }
 
-exports.sendmail = function(subject, body) {
+exports.send = function(subject, body) {
 
   createTransporter().then(function(transport) {
-
     var mail = createMail(subject, body);
-
     transport.sendMail(mail, (error, info) => {
       if (error) {
         return console.log(error);

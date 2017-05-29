@@ -31,7 +31,7 @@ var resultOfPoll = [];
 
 
 var fetchBuildStatus = function() {
-  console.log('fetchBuildStatus A');
+  //console.log('fetchBuildStatus A');
 
   var resolve, reject;
   var result = new Promise(function(res, rej) {
@@ -40,7 +40,7 @@ var fetchBuildStatus = function() {
   });
 
   init().then(() => {
-console.log('fetchBuildStatus B');
+//console.log('fetchBuildStatus B');
       properties.fetch()
         .then(jenkins.poll)
         .then(parser.decorate)
@@ -48,12 +48,12 @@ console.log('fetchBuildStatus B');
         .then(jira.decorate)
 
       .then(function(result) {
-console.log('fetchBuildStatus Z');
+//console.log('fetchBuildStatus Z');
         //console.log('>>>>>>', result.length);
         resultOfPoll = result;
 
       }, function(error) {
-        //console.log('error');
+        console.log('error');
       }).finally(function() {
         //console.log('finally', resultOfPoll.length);
 
@@ -67,7 +67,7 @@ console.log('fetchBuildStatus Z');
           startupReport = false;
 
         }, function(result) {
-          //console.log('NO new data to report', result.length);
+          ///console.log('NO new data to report', result.length);
 
           if (startupReport) {
             savedata.uniondata(resultOfPoll).then((u) => {

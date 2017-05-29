@@ -2,12 +2,10 @@ var request = require('request');
 var Promise = require('promise');
 var fs = require('fs');
 
-
-var branch = 'atlas-snapshot-trunk';
-var urlSuffix = '/api/json?pretty=true';
+var urlSuffix = 'api/json?pretty=true';
 
 var poll = function(jobs) {
-  console.log('Jenkins: poll', jobs.length);
+  //console.log('Jenkins: poll', jobs.length);
 
   return new Promise(function(resolve, reject) {
 
@@ -17,14 +15,13 @@ var poll = function(jobs) {
     var buildModels = [];
 
     jobs.forEach(function(j) {
-        console.log('Jenkins: poll', j.jUrl);
       jobDetails.push(getBuilds(j.jUrl));
+    
     });
 
     Promise.all(jobDetails).then(function(result) {      
       
       result.forEach(function(detail) {
-
         detail.builds.forEach(function(bbb) {
           builds.push(bbb);  
         });
@@ -54,13 +51,17 @@ var poll = function(jobs) {
 }
 
   var getBuilds = function(jenkinsUrl) {
-    console.log('   Jenkins: getBuilds', jenkinsUrl);
+    //console.log('   Jenkins: getBuilds', jenkinsUrl);
 
     return new Promise(function(resolve, reject) {
+      if (process.env.MOCK) {
+        jenkinsUrl = jenkinsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');
+      }
+
+      //console.log("jenkinsURL", jenkinsUrl);
 
       request(jenkinsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-
           var build = JSON.parse(body);
           resolve(build);
         }
@@ -77,12 +78,13 @@ var poll = function(jobs) {
       var buildDetailsUrl = build.url + urlSuffix;
 
       if (process.env.MOCK) {
-        //buildDetailsUrl = buildDetailsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');      
+        buildDetailsUrl = buildDetailsUrl.replace('http://vl-bygget:8080/', 'http://localhost:3000/');      
       }
+
+      //console.log("", buildDetailsUrl);
 
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          
           var result = JSON.parse(body);
           resolve(result);
         } else {
@@ -96,10 +98,10 @@ var poll = function(jobs) {
 
 
   var buildModel = function(res) {
-    //console.log('--->', res.result);
+    //console.log('--->', res.changeSet.items[0]);
     var o =  {};
     o.id = res.id;
-    o.user = res.changeSet.items[0].user;
+    o.user = res.changeSet.items[0].author.fullName;
     o.msg = res.changeSet.items[0].msg;
     o.date = res.changeSet.items[0].date;
     o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z

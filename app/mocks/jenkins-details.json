@@ -1,478 +1,142 @@
 {
+  "_class" : "hudson.maven.MavenModuleSetBuild",
   "actions" : [
     {
+      "_class" : "hudson.model.CauseAction",
       "causes" : [
         {
+          "_class" : "hudson.triggers.SCMTrigger$SCMTriggerCause",
           "shortDescription" : "Started by an SCM change"
         }
       ]
     },
     {
-      
+
     },
     {
-      
+      "_class" : "hudson.plugins.git.util.BuildData",
+      "buildsByBranchName" : {
+        "refs/remotes/origin/release/10.1" : {
+          "_class" : "hudson.plugins.git.util.Build",
+          "buildNumber" : 12,
+          "buildResult" : null,
+          "marked" : {
+            "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+            "branch" : [
+              {
+                "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+                "name" : "refs/remotes/origin/release/10.1"
+              }
+            ]
+          },
+          "revision" : {
+            "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+            "branch" : [
+              {
+                "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+                "name" : "refs/remotes/origin/release/10.1"
+              }
+            ]
+          }
+        }
+      },
+      "lastBuiltRevision" : {
+        "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+        "branch" : [
+          {
+            "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+            "name" : "refs/remotes/origin/release/10.1"
+          }
+        ]
+      },
+      "remoteUrls" : [
+        "git@git:jbr/atlas.git"
+      ],
+      "scmName" : ""
     },
     {
-      
+      "_class" : "hudson.plugins.git.GitTagAction"
     },
     {
-      
+
+    },
+    {
+      "_class" : "hudson.maven.reporters.MavenAggregatedArtifactRecord"
+    },
+    {
+      "_class" : "hudson.maven.reporters.SurefireAggregatedReport",
+      "failCount" : 0,
+      "skipCount" : 0,
+      "totalCount" : 5170,
+      "urlName" : "testReport"
+    },
+    {
+
+    },
+    {
+
     }
   ],
   "artifacts" : [
-    
+
   ],
   "building" : false,
   "description" : null,
-  "duration" : 17685,
-  "estimatedDuration" : 439873,
+  "displayName" : "#12",
+  "duration" : 496411,
+  "estimatedDuration" : 538595,
   "executor" : null,
-  "fullDisplayName" : "atlas-snapshot-trunk #5432",
-  "id" : "2016-12-13_11-41-17",
+  "fullDisplayName" : "atlas-snapshot-GIT-release-10.1 #12",
+  "id" : "12",
   "keepLog" : false,
-  "number" : 5432,
-  "result" : "FAILURE",
-  "timestamp" : 1481625677000,
-  "url" : "https://utv.sjv.se/jenkins/view/kontroll/job/atlas-snapshot-trunk/5432/",
+  "number" : 12,
+  "queueId" : 7405,
+  "result" : "SUCCESS",
+  "timestamp" : 1495799701385,
+  "url" : "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-10.1/12/",
   "builtOn" : "",
   "changeSet" : {
+    "_class" : "hudson.plugins.git.GitChangeSetList",
     "items" : [
       {
+        "_class" : "hudson.plugins.git.GitChangeSet",
         "affectedPaths" : [
-          "atlas-grunddata/pom.xml"
+          "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.10.1.1/kontrollpunktsregler-2017.10.1.1.drl",
+          "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.10.1.1/2017.10.1.1.xml"
         ],
+        "commitId" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+        "timestamp" : 1495799383000,
         "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
+          "absoluteUrl" : "http://vl-bygget:8080/jenkins/user/otorn",
+          "fullName" : "Oscar Törnroth"
         },
-        "commitId" : "120302",
-        "timestamp" : 1481625621297,
-        "date" : "2016-12-13T10:40:21.297643Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
+        "authorEmail" : "oscar.tornroth@jordbruksverket.se",
+        "comment" : "PCAP-20452 - Ny grunddata version. CR:fwin\n",
+        "date" : "2017-05-26 13:49:43 +0200",
+        "id" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+        "msg" : "PCAP-20452 - Ny grunddata version. CR:fwin",
         "paths" : [
           {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-grunddata/pom.xml"
-          }
-        ],
-        "revision" : 120302,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-gui/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120301",
-        "timestamp" : 1481625620939,
-        "date" : "2016-12-13T10:40:20.939151Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
+            "editType" : "add",
+            "file" : "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.10.1.1/kontrollpunktsregler-2017.10.1.1.drl"
+          },
           {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-gui/pom.xml"
+            "editType" : "add",
+            "file" : "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.10.1.1/2017.10.1.1.xml"
           }
-        ],
-        "revision" : 120301,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-kontrollbrev/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120300",
-        "timestamp" : 1481625620578,
-        "date" : "2016-12-13T10:40:20.578991Z",
-        "msg" : "PCAP-16232 bla bla bla",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-kontrollbrev/pom.xml"
-          }
-        ],
-        "revision" : 120300,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-ear/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120299",
-        "timestamp" : 1481625620196,
-        "date" : "2016-12-13T10:40:20.196386Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-ear/pom.xml"
-          }
-        ],
-        "revision" : 120299,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-eventstore/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120298",
-        "timestamp" : 1481625619800,
-        "date" : "2016-12-13T10:40:19.800371Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-eventstore/pom.xml"
-          }
-        ],
-        "revision" : 120298,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-statistik/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120297",
-        "timestamp" : 1481625619418,
-        "date" : "2016-12-13T10:40:19.418288Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-statistik/pom.xml"
-          }
-        ],
-        "revision" : 120297,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120296",
-        "timestamp" : 1481625618986,
-        "date" : "2016-12-13T10:40:18.986806Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/pom.xml"
-          }
-        ],
-        "revision" : 120296,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "sjv-dataexport/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120295",
-        "timestamp" : 1481625618578,
-        "date" : "2016-12-13T10:40:18.578923Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/sjv-dataexport/pom.xml"
-          }
-        ],
-        "revision" : 120295,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-urval-ejb/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120294",
-        "timestamp" : 1481625615736,
-        "date" : "2016-12-13T10:40:15.736610Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-urval-ejb/pom.xml"
-          }
-        ],
-        "revision" : 120294,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-rules-generator/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120293",
-        "timestamp" : 1481625615340,
-        "date" : "2016-12-13T10:40:15.340594Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-rules-generator/pom.xml"
-          }
-        ],
-        "revision" : 120293,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "mapfish-connector/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120292",
-        "timestamp" : 1481625614938,
-        "date" : "2016-12-13T10:40:14.938776Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/mapfish-connector/pom.xml"
-          }
-        ],
-        "revision" : 120292,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-common/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120291",
-        "timestamp" : 1481625614555,
-        "date" : "2016-12-13T10:40:14.555100Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-common/pom.xml"
-          }
-        ],
-        "revision" : 120291,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-rules/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120290",
-        "timestamp" : 1481625614139,
-        "date" : "2016-12-13T10:40:14.139718Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-rules/pom.xml"
-          }
-        ],
-        "revision" : 120290,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-projection/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120289",
-        "timestamp" : 1481625613777,
-        "date" : "2016-12-13T10:40:13.777342Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-projection/pom.xml"
-          }
-        ],
-        "revision" : 120289,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-ejb/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120288",
-        "timestamp" : 1481625613379,
-        "date" : "2016-12-13T10:40:13.379315Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-ejb/pom.xml"
-          }
-        ],
-        "revision" : 120288,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-blis/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120287",
-        "timestamp" : 1481625612896,
-        "date" : "2016-12-13T10:40:12.896912Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-blis/pom.xml"
-          }
-        ],
-        "revision" : 120287,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-grunddata-xml/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120286",
-        "timestamp" : 1481625612501,
-        "date" : "2016-12-13T10:40:12.501412Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-grunddata-xml/pom.xml"
-          }
-        ],
-        "revision" : 120286,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-grunddata-ejb/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120285",
-        "timestamp" : 1481625612115,
-        "date" : "2016-12-13T10:40:12.115292Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-grunddata-ejb/pom.xml"
-          }
-        ],
-        "revision" : 120285,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-persistence-unit/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120284",
-        "timestamp" : 1481625611707,
-        "date" : "2016-12-13T10:40:11.707727Z",
-        "msg" : "New version in POM file: 7.1.3-SNAPSHOT",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-persistence-unit/pom.xml"
-          }
-        ],
-        "revision" : 120284,
-        "user" : "cm"
-      },
-      {
-        "affectedPaths" : [
-          "atlas-web/pom.xml"
-        ],
-        "author" : {
-          "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-          "fullName" : "cm"
-        },
-        "commitId" : "120283",
-        "timestamp" : 1481625611294,
-        "date" : "2016-12-13T10:40:11.294846Z",
-        "msg" : "PCAP-16232 bla bla bla",
-        "paths" : [
-          {
-            "editType" : "edit",
-            "file" : "/system/kontroll/atlas/trunk/atlas-web/pom.xml"
-          }
-        ],
-        "revision" : 120283,
-        "user" : "cm"
+        ]
       }
     ],
-    "kind" : "svn",
-    "revisions" : [
-      {
-        "module" : "svn+ssh://cm-java@vl-delta/data/svn/repos/java/system/kontroll/atlas/trunk",
-        "revision" : 120302
-      }
-    ]
+    "kind" : "git"
   },
   "culprits" : [
     {
-      "absoluteUrl" : "https://utv.sjv.se/jenkins/user/cm",
-      "fullName" : "cm"
+      "absoluteUrl" : "http://vl-bygget:8080/jenkins/user/otorn",
+      "fullName" : "Oscar Törnroth"
     }
   ],
-  "mavenArtifacts" : null,
-  "mavenVersionUsed" : "3.0.5"
+  "mavenArtifacts" : {
+
+  },
+  "mavenVersionUsed" : "3.3.9"
 }

@@ -12,7 +12,7 @@ var savedata = function(buildsFromJenkins) {
 
     readstoreddata().then(function(storedBuilds) {    
       var unionOfBuilds = uniondata(storedBuilds, buildsFromJenkins);
-
+      
       if (storedBuilds.length === unionOfBuilds.length) {
         reject(unionOfBuilds);
         return;

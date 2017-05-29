@@ -6,7 +6,7 @@ var Promise = require('promise');
 
 
 var fetchJiraUser = function() {
-  console.log('Properties: fetch');
+  //console.log('Properties: fetch');
 
   return new Promise(function(resolve, reject) {
 
@@ -34,7 +34,7 @@ var loginArgs = {
 var session = null;
 
 var login = function(user) {
-  console.log('login', user);
+  //console.log('login', user);
   loginArgs.data = user;
 
   return new Promise(function(resolve, reject) {
@@ -51,7 +51,7 @@ var login = function(user) {
 
     var baseurl = 'https://etjanst.sjv.se/';
     if (process.env.MOCK) {
-      //baseurl = 'http://localhost:3000/'
+      baseurl = 'http://localhost:3000/'
     }
 
     var loginUrl = baseurl + 'jira/rest/auth/1/session';
@@ -66,7 +66,7 @@ var login = function(user) {
         // Get the session information and store it in a cookie in the header
         var searchArgs = constructSearchArgs(session);
 
-        console.log('succesfully logged in, session:', data.session);
+        //console.log('succesfully logged in, session:', data.session);
         resolve(searchArgs);
 
       } else {
@@ -102,7 +102,7 @@ var getJiraInfo = function(build, searchArgs) {
 
     var baseurl = 'https://etjanst.sjv.se/';
     if (process.env.MOCK) {
-      //baseurl = 'http://localhost:3000/'
+      baseurl = 'http://localhost:3000/'
     }
 
     var url = baseurl + "jira/rest/api/2/issue/" + build.jira;

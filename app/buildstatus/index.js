@@ -38,7 +38,7 @@ var init = function() {
     console.log('  - i mockat läge');
   }
 
-  console.log('  - %j antal builds visas', program.numberofbuilds);
+  console.log('  - %j antal builds visas', OPTS.n);
 
   resolve();
 

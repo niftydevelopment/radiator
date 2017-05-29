@@ -3,11 +3,11 @@ var Promise = require('promise');
 
 var poll = function(builds) {
   
-  console.log('Sonar: poll', builds.length);
+  //console.log('Sonar: poll', builds.length);
   
   var baseurl = 'http://vl-bygget-icc:9000/';
   if (process.env.MOCK) {
-    //baseurl = 'http://localhost:3000/'
+    baseurl = 'http://localhost:3000/'
   }
 
   var url = baseurl + 'api/resources?metrics=ncloc,coverage&format=json';
@@ -45,7 +45,7 @@ var issues = function() {
   //http://vl-bygget-icc:9000/api/issues/search?componentRoots=se.sjv.kontroll.atlas:atlas-parent&pageSize=-1
   var baseurl = 'http://vl-bygget-icc:9000/';
   if (process.env.MOCK) {
-    //baseurl = 'http://localhost:3000/'
+    baseurl = 'http://localhost:3000/'
   }
 
   var url = baseurl + 'api/issues/search?componentRoots=se.sjv.kontroll.atlas:atlas-parent';

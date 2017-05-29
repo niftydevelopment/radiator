@@ -1,7 +1,7 @@
 var Promise = require('promise');
 
 var decorate = function(builds) {
-  console.log('Parser: decorate', builds.length);
+  //console.log('Parser: decorate', builds.length);
   
   function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -10,6 +10,7 @@ var decorate = function(builds) {
   return new Promise(function(resolve, reject) {
   	
   	builds.forEach(function(b) {
+
   		if (b.msg.substring(b.msg.indexOf('PCAP-')) === -1) {
   			return;
   		}

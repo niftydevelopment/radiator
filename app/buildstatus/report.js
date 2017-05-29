@@ -140,6 +140,16 @@ var printAtlas = function(lastBuild, builds) {
   var status = lastBuild.result;
   var formattedCoverage = lastBuild.formattedCoverage;
 
+  if (process.env.MOCK) {
+    return new Promise(function(resolve) {
+        figlet('** A T L A S ' + formattedCoverage + ' **', function(err, data) {
+          console.log(data);
+          resolve();
+        });
+
+      });
+  }
+
   var color = colors.green;
   
   if (!formattedCoverage) {
@@ -161,6 +171,8 @@ var printAtlas = function(lastBuild, builds) {
   if (status === 'FAILURE') {
     color = colors.red;
   }
+
+  console.log("HEJ");
 
   return new Promise(function(resolve) {
 

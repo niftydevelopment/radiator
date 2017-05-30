@@ -1,0 +1,142 @@
+{
+  "_class" : "hudson.maven.MavenModuleSetBuild",
+  "actions" : [
+    {
+      "_class" : "hudson.model.CauseAction",
+      "causes" : [
+        {
+          "_class" : "hudson.triggers.SCMTrigger$SCMTriggerCause",
+          "shortDescription" : "Started by an SCM change"
+        }
+      ]
+    },
+    {
+
+    },
+    {
+      "_class" : "hudson.plugins.git.util.BuildData",
+      "buildsByBranchName" : {
+        "refs/remotes/origin/release/11.0" : {
+          "_class" : "hudson.plugins.git.util.Build",
+          "buildNumber" : 12,
+          "buildResult" : null,
+          "marked" : {
+            "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+            "branch" : [
+              {
+                "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+                "name" : "refs/remotes/origin/release/11.0"
+              }
+            ]
+          },
+          "revision" : {
+            "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+            "branch" : [
+              {
+                "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+                "name" : "refs/remotes/origin/release/11.0"
+              }
+            ]
+          }
+        }
+      },
+      "lastBuiltRevision" : {
+        "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+        "branch" : [
+          {
+            "SHA1" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+            "name" : "refs/remotes/origin/release/11.0"
+          }
+        ]
+      },
+      "remoteUrls" : [
+        "git@git:jbr/atlas.git"
+      ],
+      "scmName" : ""
+    },
+    {
+      "_class" : "hudson.plugins.git.GitTagAction"
+    },
+    {
+
+    },
+    {
+      "_class" : "hudson.maven.reporters.MavenAggregatedArtifactRecord"
+    },
+    {
+      "_class" : "hudson.maven.reporters.SurefireAggregatedReport",
+      "failCount" : 0,
+      "skipCount" : 0,
+      "totalCount" : 5170,
+      "urlName" : "testReport"
+    },
+    {
+
+    },
+    {
+
+    }
+  ],
+  "artifacts" : [
+
+  ],
+  "building" : false,
+  "description" : null,
+  "displayName" : "#12",
+  "duration" : 496411,
+  "estimatedDuration" : 538595,
+  "executor" : null,
+  "fullDisplayName" : "atlas-snapshot-GIT-release-11.0 #12",
+  "id" : "12",
+  "keepLog" : false,
+  "number" : 12,
+  "queueId" : 7405,
+  "result" : "SUCCESS",
+  "timestamp" : 1495799701385,
+  "url" : "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/12/",
+  "builtOn" : "",
+  "changeSet" : {
+    "_class" : "hudson.plugins.git.GitChangeSetList",
+    "items" : [
+      {
+        "_class" : "hudson.plugins.git.GitChangeSet",
+        "affectedPaths" : [
+          "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.11.0.1/kontrollpunktsregler-2017.11.0.1.drl",
+          "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.11.0.1/2017.11.0.1.xml"
+        ],
+        "commitId" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+        "timestamp" : 1495799383000,
+        "author" : {
+          "absoluteUrl" : "http://vl-bygget:8080/jenkins/user/otorn",
+          "fullName" : "Eje Svensson"
+        },
+        "authorEmail" : "eje.svensson@jordbruksverket.se",
+        "comment" : "PCAP-24352 - Test av test. CR:dsin\n",
+        "date" : "2017-05-22 13:37:00 +0200",
+        "id" : "e33279eb3b02fb5b83a7a5700e831a989e20607d",
+        "msg" : "PCAP-24352 - Test av test. CR:dsin",
+        "paths" : [
+          {
+            "editType" : "add",
+            "file" : "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.11.0.1/kontrollpunktsregler-2017.11.0.1.drl"
+          },
+          {
+            "editType" : "add",
+            "file" : "atlas-grunddata-xml/src/main/resources/atlas/grunddata/2017.11.0.1/2017.11.0.1.xml"
+          }
+        ]
+      }
+    ],
+    "kind" : "git"
+  },
+  "culprits" : [
+    {
+      "absoluteUrl" : "http://vl-bygget:8080/jenkins/user/otorn",
+      "fullName" : "Eje Svensson"
+    }
+  ],
+  "mavenArtifacts" : {
+
+  },
+  "mavenVersionUsed" : "3.3.9"
+}

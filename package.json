@@ -12,7 +12,8 @@
     "dev-app": "nodemon ./app/app.js",
     "dev-app-mocked": "nodemon ./app/app.js mock",
     "dev": "concurrently --kill-others \"nodemon ./app/mockserver.js\" \"nodemon ./app/index.js mock\"",
-    "dev-buildstatus": "concurrently --kill-others \"nodemon ./app/mockserver.js\" \"nodemon ./app/buildstatus/index.js mock\""
+    "dev-buildstatus": "nodemon ./app/buildstatus/index.js mock",
+    "mock": "node ./app/mockserver.js"
   },
   "repository": {
     "type": "git",

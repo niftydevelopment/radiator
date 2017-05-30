@@ -74,6 +74,8 @@ var poll = function(jobs) {
 
   var getDetailsForABuild = function(build) {
     return new Promise(function(resolve, reject) {
+      var lastPart = build.url.split("/");
+      var id = lastPart[lastPart.length - 2];
 
       var buildDetailsUrl = build.url + urlSuffix;
 
@@ -86,6 +88,10 @@ var poll = function(jobs) {
       request(buildDetailsUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           var result = JSON.parse(body);
+          var oldId = result.id;
+
+          result.id = id;
+          result.fullDisplayName = result.fullDisplayName.replace("#" + oldId, "#" + id);
           resolve(result);
         } else {
           console.log('EEEERRRROROOR');
@@ -107,6 +113,7 @@ var poll = function(jobs) {
     o.formattedDate = res.changeSet.items[0].date.replace(/\D/g,'');//2016-12-02T12:33:40.126635Z
     o.result = res.result;
     o.fullDisplayName = res.fullDisplayName;
+    o.buildName = res.fullDisplayName.replace(" #" + res.id, "");
     //console.log('-------------', o.result);
     return o;
   }

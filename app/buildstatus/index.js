@@ -25,13 +25,14 @@ var init = function() {
   var OPTS = {n:8,m:false};
 
   if (program.numberofbuilds) {
-    OPTS.n = program.numberofbuilds;
+    OPTS.n = program.numberofbuilds; 
   }
+  process.env['BUILDS'] = OPTS.n;
 
   if (program.mock) {
     OPTS.m = true;
-    process.env['MOCK'] = OPTS;
   }
+  process.env['MOCK'] = OPTS.m;
   
   console.log('Radiator startad:');
   if (program.mock) {

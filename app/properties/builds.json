@@ -1,4 +1,5 @@
 [
-	{"jenkins":"atlas-snapshot-GIT-release-10.1","jira":"Atlas 10.1"}
+	{"jenkins":"atlas-snapshot-GIT-release-10.1","jira":"Atlas 10.1"},
+  {"jenkins":"atlas-snapshot-GIT-release-11.0","jira":"Atlas 11.0"}
 ]
 

@@ -1,0 +1,242 @@
+{
+  "_class": "hudson.maven.MavenModuleSet",
+  "actions": [
+    null,
+    {},
+    {},
+    {},
+    {
+      "_class": "com.cloudbees.plugins.credentials.ViewCredentialsAction"
+    }
+  ],
+  "description": "Snapshot bygge för 11.0 release",
+  "displayName": "atlas-snapshot-GIT-release-11.0",
+  "displayNameOrNull": null,
+  "name": "atlas-snapshot-GIT-release-11.0",
+  "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/",
+  "buildable": true,
+  "builds": [
+    {
+      "_class": "hudson.maven.MavenModuleSetBuild",
+      "number": 16,
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/16/"
+    },
+    {
+      "_class": "hudson.maven.MavenModuleSetBuild",
+      "number": 15,
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/15/"
+    },
+    {
+      "_class": "hudson.maven.MavenModuleSetBuild",
+      "number": 14,
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/14/"
+    },
+    {
+      "_class": "hudson.maven.MavenModuleSetBuild",
+      "number": 13,
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/13/"
+    },
+    {
+      "_class": "hudson.maven.MavenModuleSetBuild",
+      "number": 12,
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/12/"
+    }
+  ],
+  "color": "blue",
+  "firstBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 12,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/12/"
+  },
+  "healthReport": [
+    {
+      "description": "Build stability: 1 out of the last 5 builds failed.",
+      "iconClassName": "icon-health-60to79",
+      "iconUrl": "health-60to79.png",
+      "score": 80
+    },
+    {
+      "description": "Test Result: 0 tests failing out of a total of 5,171 tests.",
+      "iconClassName": "icon-health-80plus",
+      "iconUrl": "health-80plus.png",
+      "score": 100
+    }
+  ],
+  "inQueue": false,
+  "keepDependencies": false,
+  "lastBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 16,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/16/"
+  },
+  "lastCompletedBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 16,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/16/"
+  },
+  "lastFailedBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 14,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/14/"
+  },
+  "lastStableBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 16,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/16/"
+  },
+  "lastSuccessfulBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 16,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/16/"
+  },
+  "lastUnstableBuild": null,
+  "lastUnsuccessfulBuild": {
+    "_class": "hudson.maven.MavenModuleSetBuild",
+    "number": 14,
+    "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/14/"
+  },
+  "nextBuildNumber": 17,
+  "property": [
+    {
+      "_class": "com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty"
+    },
+    {
+      "_class": "jenkins.model.BuildDiscarderProperty"
+    },
+    {
+      "_class": "de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty",
+      "wallDisplayBgPicture": null,
+      "wallDisplayName": null,
+      "wallDisplayOrder": null
+    }
+  ],
+  "queueItem": null,
+  "concurrentBuild": false,
+  "downstreamProjects": [],
+  "scm": {
+    "_class": "hudson.plugins.git.GitSCM"
+  },
+  "upstreamProjects": [],
+  "modules": [
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-blis",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-blis/",
+      "color": "blue",
+      "displayName": "atlas-blis"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-common",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-common/",
+      "color": "blue",
+      "displayName": "atlas-common"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-ear",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-ear/",
+      "color": "blue",
+      "displayName": "Atlas - EAR"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-ejb",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-ejb/",
+      "color": "blue",
+      "displayName": "atlas-ejb"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-eventstore",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-eventstore/",
+      "color": "blue",
+      "displayName": "atlas-eventstore"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-grunddata",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-grunddata/",
+      "color": "blue",
+      "displayName": "atlas-grunddata"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-grunddata-ejb",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-grunddata-ejb/",
+      "color": "blue",
+      "displayName": "atlas-grunddata-ejb"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-grunddata-xml",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-grunddata-xml/",
+      "color": "blue",
+      "displayName": "atlas-grunddata-xml"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-gui",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-gui/",
+      "color": "blue",
+      "displayName": "atlas-gui"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-kontrollbrev",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-kontrollbrev/",
+      "color": "blue",
+      "displayName": "atlas-kontrollbrev"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-parent",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-parent/",
+      "color": "blue",
+      "displayName": "Atlas - parent"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-persistence-unit",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-persistence-unit/",
+      "color": "blue",
+      "displayName": "atlas-persistence-unit"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-projection",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-projection/",
+      "color": "blue",
+      "displayName": "atlas-projection-ejb"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-rules",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-rules/",
+      "color": "blue",
+      "displayName": "atlas-rules"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-rules-generator",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-rules-generator/",
+      "color": "blue",
+      "displayName": "atlas-rules-generator"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-sjv-dataexport",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-sjv-dataexport/",
+      "color": "blue",
+      "displayName": "atlas-sjv-dataexport"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-statistik",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-statistik/",
+      "color": "blue",
+      "displayName": "atlas-statistik"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-urval-ejb",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-urval-ejb/",
+      "color": "blue",
+      "displayName": "atlas-urval-ejb"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:atlas-web",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$atlas-web/",
+      "color": "blue",
+      "displayName": "Atlas - WAR"
+    },
+    {
+      "name": "se.sjv.kontroll.atlas:mapfish-connector",
+      "url": "http://vl-bygget:8080/jenkins/view/kontroll/job/atlas-snapshot-GIT-release-11.0/se.sjv.kontroll.atlas$mapfish-connector/",
+      "color": "blue",
+      "displayName": "mapfish-connector"
+    }
+  ]
+}

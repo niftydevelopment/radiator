@@ -22,6 +22,15 @@ fs.readFile('./app/mocks/jenkins-details.json', 'utf8', function (err, data) {
   jenkinsBuildDetails = data;
 });
 
+var jenkinsBuilds1 = {};
+fs.readFile('./app/mocks/jenkins.1.json', 'utf8', function (err, data) {
+  jenkinsBuilds1 = data;
+});
+
+var jenkinsBuildDetails1 = {};
+fs.readFile('./app/mocks/jenkins-details.1.json', 'utf8', function (err, data) {
+  jenkinsBuildDetails1 = data;
+});
 
 var jira = {};
 fs.readFile('./app/mocks/jira.json', 'utf8', function (err, data) {
@@ -52,12 +61,24 @@ app.get('/api/resources', function (req, res) {
 //\\d+/api/json/
 app.get('/jenkins/view/kontroll/job/:job/api/json/', function (req, res) {
   //console.log('pollar jenkins');
-  res.send(jenkinsBuilds);
+  if (req.url.indexOf("release-10.1") > 0) {
+    res.send(jenkinsBuilds);
+  } else if (req.url.indexOf("release-11.0") > 0) {
+    res.send(jenkinsBuilds1);
+  } else {
+    res.send(jenkinsBuilds);
+  }
 });
 
 app.get('/jenkins/view/kontroll/job/:job/*', function (req, res) {
   //console.log('Ber om detaljerna från jenkins');
+  if (req.url.indexOf("release-10.1") > 0) {
   res.send(jenkinsBuildDetails);
+  } else if (req.url.indexOf("release-11.0") > 0) {
+  res.send(jenkinsBuildDetails1);
+  } else {
+  res.send(jenkinsBuildDetails);
+  }
 });
 
 app.post('/jira/rest/auth/1/session', function(req, res) {

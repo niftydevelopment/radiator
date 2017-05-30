@@ -29,7 +29,7 @@ var savedata = function(buildsFromJenkins) {
 };
 
 var uniondata = function(storedBuilds, newBuilds) {
-  return _.unionBy(storedBuilds, newBuilds, 'id');
+  return _.unionBy(storedBuilds, newBuilds, 'fullDisplayName');
 }
 
 var readstoreddata = function() {

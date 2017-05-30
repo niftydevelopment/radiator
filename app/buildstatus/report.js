@@ -16,22 +16,32 @@ var generate = function(builds) {
     return;
   };
 
+  var buildnames = _.uniqBy(builds, 'buildName').map(function(elem) {
+    return elem.buildName;
+  });
+
+  
+
   builds = _.sortBy(builds, function(b) {
     return -b.formattedDate;
   });
 
-  var lastBuild = builds.filter(function(b) {
-    return b.formattedCoverage !== undefined;
-  })[0];
-  
-  printAtlas(lastBuild, builds).then(function() {
+  var lastBuilds = new Array();
+  buildnames.forEach(function(elem) {
+     lastBuilds[lastBuilds.length] = builds.filter(function(b) {
+      return b.buildName === elem &&
+        b.formattedCoverage !== undefined;
+    })[0];
+  });
 
-    printBuildHistory(builds);
+  printAtlas(lastBuilds, builds).then(function() {
+
+    //printBuildHistory(builds);
 
     var failedBuids = getFailedBuildsInOrder(builds);
 
     builds.forEach(function(b, i) {
-      if (i > 5) {
+      if (i >= process.env.BUILDS) {
         return;
       }
       //console.log(b.result);
@@ -112,6 +122,25 @@ var getFailedBuildsInOrder = function(builds) {
 
 }
 
+var getMedianLastBuild = function(lastBuilds) {
+  var lastBuild = {
+    coverage: 0,
+    result: ''
+  };
+
+  lastBuilds.forEach(function(build) {
+    lastBuild.coverage += build.coverage;
+    if (build.result === 'FAILURE' || lastBuild.result !== 'FAILURE') {
+      lastBuild.result = build.result;
+    }
+  });
+
+  lastBuild.coverage = lastBuild.coverage / lastBuilds.length; 
+  lastBuild.formattedCoverage = lastBuild.coverage + "%";
+
+  return lastBuild;
+}
+
 var printBuilds = function(build, builds) {
   //console.log('printBuilds', build);
 
@@ -131,10 +160,13 @@ var printBuilds = function(build, builds) {
   }
 }
 
-var printAtlas = function(lastBuild, builds) {
-
+var printAtlas = function(lastBuilds, builds) {
+  var lastBuild = getMedianLastBuild(lastBuilds);
+  
   builds = builds.filter(function(b) { //disregard latest
-    return b.id !== lastBuild.id;
+    return lastBuilds.map(function(build) {
+      return build.id;
+    }).includes(b.id);
   });
 
   var status = lastBuild.result;
@@ -171,8 +203,6 @@ var printAtlas = function(lastBuild, builds) {
   if (status === 'FAILURE') {
     color = colors.red;
   }
-
-  console.log("HEJ");
 
   return new Promise(function(resolve) {
 

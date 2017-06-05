@@ -54,7 +54,7 @@ var poll = function(jobs) {
     //console.log('   Jenkins: getBuilds', jenkinsUrl);
 
     return new Promise(function(resolve, reject) {
-      if (process.env.MOCK) {
+      if (process.env.MOCK === true) {
         jenkinsUrl = jenkinsUrl.replace('https://utv.sjv.se/', 'http://localhost:3000/');
       }
 
@@ -79,7 +79,7 @@ var poll = function(jobs) {
 
       var buildDetailsUrl = build.url + urlSuffix;
 
-      if (process.env.MOCK) {
+      if (process.env.MOCK === true) {
         buildDetailsUrl = buildDetailsUrl.replace('http://vl-bygget:8080/', 'http://localhost:3000/');      
       }
 

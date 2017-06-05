@@ -5,8 +5,8 @@ var poll = function(builds) {
   
   //console.log('Sonar: poll', builds.length);
   
-  var baseurl = 'http://vl-bygget-icc:9000/';
-  if (process.env.MOCK) {
+  var baseurl = 'http://sonarqube.intern.jordbruksverket.se/';
+  if (process.env.MOCK === true) {
     baseurl = 'http://localhost:3000/'
   }
 
@@ -43,8 +43,8 @@ var poll = function(builds) {
 var issues = function() {
   //http://vl-bygget-icc:9000/api/issues/search?componentRoots=se.sjv.kontroll.atlas:atlas-parent
   //http://vl-bygget-icc:9000/api/issues/search?componentRoots=se.sjv.kontroll.atlas:atlas-parent&pageSize=-1
-  var baseurl = 'http://vl-bygget-icc:9000/';
-  if (process.env.MOCK) {
+  var baseurl = 'http://sonarqube.intern.jordbruksverket.se/';
+  if (process.env.MOCK === true) {
     baseurl = 'http://localhost:3000/'
   }
 

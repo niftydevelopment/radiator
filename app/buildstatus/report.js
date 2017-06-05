@@ -172,7 +172,7 @@ var printAtlas = function(lastBuilds, builds) {
   var status = lastBuild.result;
   var formattedCoverage = lastBuild.formattedCoverage;
 
-  if (process.env.MOCK) {
+  if (process.env.MOCK === true) {
     return new Promise(function(resolve) {
         figlet('** A T L A S ' + formattedCoverage + ' **', function(err, data) {
           console.log(data);

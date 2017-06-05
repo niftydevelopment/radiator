@@ -73,7 +73,7 @@ var runit = function() {
       resultOfPoll = result;
     
     }, function(error) {
-      //console.log('error');
+      console.log('Error in main loop');
     }).finally(function() {
       //console.log('finally', resultOfPoll.length);
       

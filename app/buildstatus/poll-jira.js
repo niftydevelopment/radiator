@@ -50,13 +50,13 @@ var login = function(user) {
     }
 
     var baseurl = 'https://etjanst.sjv.se/';
-    if (process.env.MOCK) {
+    if (process.env.MOCK === true) {
       baseurl = 'http://localhost:3000/'
     }
 
     var loginUrl = baseurl + 'jira/rest/auth/1/session';
 
-    //console.log(loginUrl);
+    console.log(loginUrl);
 
     client.post(loginUrl, loginArgs, function(data, response) {
 
@@ -101,7 +101,7 @@ var getJiraInfo = function(build, searchArgs) {
   return new Promise(function(resolve, reject) {
 
     var baseurl = 'https://etjanst.sjv.se/';
-    if (process.env.MOCK) {
+    if (process.env.MOCK === true) {
       baseurl = 'http://localhost:3000/'
     }
 
